@@ -3,3 +3,6 @@
 #Sebastian is checking if he managed to understand Git :)
 
 Official Repository for Product development course
+
+Example text
+anothe example
