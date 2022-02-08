@@ -20,7 +20,7 @@ clock = pygame.time.Clock()
 
 while running:                      # main loop
     clock = pygame.time.Clock()
-    print(clock.tick(c.screen["FPS"]))
+    clock.tick(c.screen["FPS"])
     
     for e in pygame.event.get():    # Get all the events
         if e.type == pygame.QUIT:   
