@@ -37,7 +37,7 @@ def training_program(length, training_type):
     # After the lists are chosen, randomly picks numbers from list later.
     
     decks= {
-        "warmup": [1, 2, 3, 4], 
+        "warmup": [0, 1, 2, 3, 4], 
 
         "strength": [5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 
                     15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25],
@@ -97,7 +97,7 @@ def training_program(length, training_type):
             return training
 
     # This function is specifically created for the balance training option to work. 
-    # otherwise it works similarly to training().
+    # Otherwise it works similarly to training().
 
     def mixed_deck(y, warmup, decks, cooldown, savasana):
         

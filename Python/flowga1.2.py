@@ -1,7 +1,7 @@
 import pygame
 import sys
 from pygame.locals import *
-import randomizer1
+import randomizer2
 pygame.init()
 
 # app window
@@ -115,7 +115,7 @@ while True:
                 sys.exit()
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option1"
-                for i in randomizer1.training_program(training_time, training_type): # Calls randomizer, which was imported
+                for i in randomizer2.training_program(training_time, training_type): # Calls randomizer, which was imported
                     list_of_cards.append(i)
                 #print(training_time)
                 counter += 1
@@ -135,12 +135,12 @@ while True:
             chosen_area.top = 295
             if counter == 2 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 list_of_cards.clear()
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
          
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option2"
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
                 counter += 1
                 tekstibutton1 = fonttioption1.render('Start training', True, sini)
@@ -164,7 +164,7 @@ while True:
                 tekstibutton3 = fonttioption1.render('Long Training', True, puna)       
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option3"
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
                 counter += 1
                 tekstibutton1 = fonttioption1.render('Start training', True, sini)
