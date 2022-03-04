@@ -126,7 +126,7 @@ def training_program(length, training_type):
             
             return training
             
-    #This data is inputted in the main program.
+    # This data is inputted in the main program.
         
     y = length
     x = training_type
