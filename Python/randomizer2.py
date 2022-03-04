@@ -27,6 +27,8 @@ Edited by Sebastian Acosta.
 
 # Importing modules first.
 import random
+from pygame.locals import *
+import Cards1
 
 # Function training_program() will be called by the main program.
 
