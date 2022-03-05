@@ -1,15 +1,13 @@
 """
 Instructions:
-
-create a deck with:
-
-4 cards for warmup, 
-20 cards for strenght, 
-20 cards for flexibility, 
-25 cards for balance, 
-15 cards for relax, 
-10 cards for cooldown,
-1 card for savasana.
+-> create a deck with:
+    4 cards for warmup, 
+    20 cards for strenght, 
+    20 cards for flexibility, 
+    25 cards for balance, 
+    15 cards for relax, 
+    10 cards for cooldown,
+    1 card for savasana.
 
 Modify the randomizer so it will accept:
 
@@ -24,18 +22,14 @@ Edited by Sebastian Acosta.
 
 """
 
-
 # Importing modules first.
 import random
 from pygame.locals import *
 import Cards1
 
 # Function training_program() will be called by the main program.
-
 def training_program(length, training_type):
-
     # Dictionary with list. A string counts as key to list values.
-
     # After the lists are chosen, randomly picks numbers from list later.
     
     decks= {
@@ -75,24 +69,19 @@ def training_program(length, training_type):
     # deck2 (flexibility), deck3 (relaxation), deck4 (balance)), cooldown, savasana).
 
     def training(y, warmup, deck, cooldown, savasana):
-
         if y == "option1":
-
             training = (random.sample(warmup, 1) + random.sample(deck, 3) + 
             random.sample(cooldown, 1)) + savasana
             
             return training
 
         if y == "option2":
-
             training = (random.sample(warmup, 4) + random.sample(deck, 4) + 
             random.sample(cooldown, 2)) + savasana
             
             return training
 
-
         if y == "option3":
-
             training = (random.sample(warmup, 5) + random.sample(deck, 5) + 
             random.sample(cooldown, 5)) + savasana
             
@@ -100,11 +89,8 @@ def training_program(length, training_type):
 
     # This function is specifically created for the balance training option to work. 
     # Otherwise it works similarly to training().
-
-    def mixed_deck(y, warmup, decks, cooldown, savasana):
-        
+    def mixed_deck(y, warmup, decks, cooldown, savasana):        
         if y == "option1":
-
             training = (random.sample(warmup, 1) + random.sample(decks[0], 1) + 
             random.sample(decks[1], 1) + random.sample(decks[2], 1) + 
             random.sample(cooldown, 1)) + savasana
@@ -112,29 +98,24 @@ def training_program(length, training_type):
             return training
 
         if y == "option2":
-
             training = (random.sample(warmup, 4) + random.sample(decks[0], 1) + 
             random.sample(decks[1], 1) + random.sample(decks[2], 2) + 
             random.sample(cooldown, 2)) + savasana
             
             return training
 
-
         if y == "option3":
-
             training = (random.sample(warmup, 4) + random.sample(decks[0], 2) + 
             random.sample(decks[1], 1) + random.sample(decks[2], 2) + 
             random.sample(cooldown, 5)) + savasana
             
             return training
             
-    # This data is inputted in the main program.
-        
+    # This data is inputted in the main program. 
     y = length
     x = training_type
 
     #Variable names:
-
     warmup = decks["warmup"]
     deck_1 = decks["strength"]
     deck_2 = decks["flexibility"]
@@ -144,29 +125,20 @@ def training_program(length, training_type):
     savasana = decks["savasana"]
 
     # Depending on options chosen, calls training() or mixed_deck() with different values.
-    
     if x == "option1":
-
         print("strenght")
-
         return training(y, warmup, deck_1, cooldown, savasana)    
 
     elif x == "option2":
-        
         print("flexibility")
-
         return training(y, warmup, deck_2, cooldown, savasana)
 
     elif x == "option3":
-
         print("relaxation")
-
         return training(y, warmup, deck_3, cooldown, savasana)
 
     elif x == "option4":
-
         print("balance")
-
         return mixed_deck(y, warmup, [deck_1, deck_2, deck_3], cooldown, savasana)
 
 
