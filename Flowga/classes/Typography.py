@@ -26,4 +26,4 @@ class Typography(object):
     
     def body(self):
         x = pygame.font.SysFont(self.fontFamily, 19)
-        return x.render(f"Testing the typography", True, (255, 255, 0))
+        return x.render(f"Testing the typography", True, (255, 255, 255))
