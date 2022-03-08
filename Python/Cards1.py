@@ -19,10 +19,6 @@ then showed by the main program.
 Code written by Sebastian Acosta.
 """
 
-# I don't know what the following line is, and at this point 
-# I'm afraid to ask. I think it appeared by itself.
-from pickle import FALSE
-
 # Importing modules first.
 import random
 
