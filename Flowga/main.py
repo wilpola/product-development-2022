@@ -1,5 +1,4 @@
-# @author: Ville Wilpola
-# @date: 2022-2-4
+# @author: Medler Labs
 # @desc: This file combines all the runtime functions in a clean way
 
 import sys
