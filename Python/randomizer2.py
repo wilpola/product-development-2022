@@ -69,18 +69,21 @@ def training_program(length, training_type):
     # deck2 (flexibility), deck3 (relaxation), deck4 (balance)), cooldown, savasana).
 
     def training(y, warmup, deck, cooldown, savasana):
+        # Short training
         if y == "option1":
             training = (random.sample(warmup, 1) + random.sample(deck, 3) + 
             random.sample(cooldown, 1)) + savasana
             
             return training
 
+        # Medium training
         if y == "option2":
             training = (random.sample(warmup, 4) + random.sample(deck, 4) + 
             random.sample(cooldown, 2)) + savasana
             
             return training
 
+        # Long training 
         if y == "option3":
             training = (random.sample(warmup, 5) + random.sample(deck, 5) + 
             random.sample(cooldown, 5)) + savasana
