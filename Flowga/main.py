@@ -5,12 +5,13 @@ import sys
 import pygame                   # import pygame lib
 import constants as c           # import all the defined constants
 from setup import setup         # import the setup function
+# from classes.RoudedButton import RoundedButton
 pygame.init()                   # initialize the pygame package
 
 setup()
 x = pygame.display.get_desktop_sizes()
 y = pygame.display.list_modes()
-print(f'x: {x}')
+print(f'x: {x[0][0]}')
 print(f'y: {y}')
 
 running = True
@@ -18,7 +19,6 @@ running = True
 clock = pygame.time.Clock()
 
 while running:                      # main loop
-    clock = pygame.time.Clock()
     clock.tick(c.screen["FPS"])
     
     for e in pygame.event.get():    # Get all the events

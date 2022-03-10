@@ -8,6 +8,10 @@ class Typography(object):
     # Get set up with params
     def __init__(self, text=""):
         self.fontFamily = 'Sans-serif'
+        self.text = text
+
+    def FontFamily(self):
+        return self.fontFamily
 
     def h1(self):
         return pygame.font.SysFont(self.fontFamily, 32)
@@ -26,4 +30,5 @@ class Typography(object):
     
     def body(self):
         x = pygame.font.SysFont(self.fontFamily, 19)
-        return x.render(f"Testing the typography", True, (255, 255, 255))
+        print('Typography().body()')
+        return x.render(f"{self.text}", True, (255, 0, 255))
