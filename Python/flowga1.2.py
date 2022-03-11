@@ -1,7 +1,7 @@
 import pygame
 import sys
 from pygame.locals import *
-import randomizer1
+import randomizer2
 pygame.init()
 
 # app window
@@ -9,7 +9,6 @@ widescreen = 1024
 heigthscreen = 800
 surfacescreen = pygame.display.set_mode((widescreen, heigthscreen))
 pygame.display.set_caption("Flowga")
-
 
 # Colors
 musta = (0,0,0)   # black color
@@ -33,12 +32,8 @@ tekstibutton1 = fonttioption1.render('Short Training', True, sini)
 tekstibutton2 = fonttioption1.render('Middle Training', True, testjoku)
 tekstibutton3 = fonttioption1.render('Long Training', True, puna)
 
-
 #Text for cards, later replaced with pictures?
 card_text = fonttioption1.render('0', True, testvihr)
-
-
-
 
 tausta.fill(testvihr)
 suorakaide1.fill(puna)
@@ -47,16 +42,13 @@ suorakaide3.fill(sini)
 suorakaide4.fill(testjoku)
 card_deal.fill(testjoku)
 
-
 surfacescreen.blit(tausta, (0,0))
 surfacescreen.blit(suorakaide1, (550,200))
 surfacescreen.blit(suorakaide2, (550,300))
 surfacescreen.blit(suorakaide3, (550,400))
 surfacescreen.blit(suorakaide4, (540,195))
 
-
 pygame.display.flip()
-
 
 # area for collision, used to recognize mouse collision later
 option_area1 = suorakaide1.get_rect()
@@ -83,7 +75,6 @@ card_position = [(50,50), (150,50), (250,50), (350,50), (450,50),
 
 kello = pygame.time.Clock()     # Do we need it? Used it for testing earlier, but decided to leave it here for now....
 
-
 counter = 0         # counter for picking first option, length of training.
 card_count = 0      # I forgot does this do anything or not.......
 training_time = ""  # placeholder for Length. determines 5, 10 or 15 cards
@@ -92,7 +83,6 @@ training_type = ""  # placeholder for type. determines which lists are used for 
 #############################################################################################
 
 while True:
-    
     # check if the user has closed the display-window or pressed esc
     for tapahtuma in pygame.event.get():  # all the events in the event queue
         if tapahtuma.type == pygame.QUIT: # if the user closed the window
@@ -102,7 +92,6 @@ while True:
             if tapahtuma.key == K_ESCAPE: # if the key was esc
                 pygame.quit() # the display-window closes
                 sys.exit()    # the whole python program exits
-
 
 ###########################################################################################
 
@@ -115,7 +104,7 @@ while True:
                 sys.exit()
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option1"
-                for i in randomizer1.training_program(training_time, training_type): # Calls randomizer, which was imported
+                for i in randomizer2.training_program(training_time, training_type): # Calls randomizer, which was imported
                     list_of_cards.append(i)
                 #print(training_time)
                 counter += 1
@@ -133,19 +122,21 @@ while True:
         if option_area2.collidepoint(pygame.mouse.get_pos()):   # option 2, middle
             chosen_area.left = 540
             chosen_area.top = 295
+
             if counter == 2 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 list_of_cards.clear()
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
          
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option2"
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
                 counter += 1
                 tekstibutton1 = fonttioption1.render('Start training', True, sini)
                 tekstibutton2 = fonttioption1.render('Reroll', True, testjoku)
                 tekstibutton3 = fonttioption1.render('Back to main menu', True, puna)
+            
             elif counter == 0 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 counter += 1
                 training_time = "option2"
@@ -156,20 +147,23 @@ while True:
         if option_area3.collidepoint(pygame.mouse.get_pos()):   # option 3, lowest
             chosen_area.left = 540
             chosen_area.top = 395
+            
             if counter == 2 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 counter = 0
                 list_of_cards.clear()
                 tekstibutton1 = fonttioption1.render('Short Training', True, sini)
                 tekstibutton2 = fonttioption1.render('Middle Training', True, testjoku)
                 tekstibutton3 = fonttioption1.render('Long Training', True, puna)       
+            
             elif counter == 1 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 training_type = "option3"
-                for i in randomizer1.training_program(training_time, training_type):
+                for i in randomizer2.training_program(training_time, training_type):
                     list_of_cards.append(i)
                 counter += 1
                 tekstibutton1 = fonttioption1.render('Start training', True, sini)
                 tekstibutton2 = fonttioption1.render('Reroll', True, testjoku)
                 tekstibutton3 = fonttioption1.render('Back to main menu', True, puna)
+            
             elif counter == 0 and tapahtuma.type == pygame.MOUSEBUTTONDOWN:
                 counter += 1
                 training_time = "option3"
@@ -179,7 +173,6 @@ while True:
                 
 
 ##############################################################################################
-
 
     surfacescreen.blit(tausta, (0,0))
     surfacescreen.blit(suorakaide4, chosen_area)
@@ -195,5 +188,6 @@ while True:
         x = str(list_of_cards[i])
         card_text = fonttioption1.render(x, True, puna)
         surfacescreen.blit(card_text, (card_position[i][0] + 10, card_position[i][1] + 20))
+    
     pygame.display.flip()
     kello.tick(200)

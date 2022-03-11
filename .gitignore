@@ -1,3 +1,10 @@
 Flowga/
 *__pycache__/
 *settings.json
+
+/Python/__pycache__
+
+/Flowga1/
+/Flowga/__pycache__
+
+
