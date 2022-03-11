@@ -26,9 +26,13 @@ clock       = pygame.time.Clock()
 primaryFont = pygame.font.SysFont("Roboto", 32)
 logoFont    = pygame.font.SysFont("Roboto", 120) 
 
+# Address fullscreen flag
+if data['fullscreen'] == True:
+    tempScreen = pygame.display.set_mode((data['width'], data['height']), pygame.FULLSCREEN)
+else:
+    tempScreen = pygame.display.set_mode((800, 600))
 # Temporary pygame elements
 pygame.display.set_caption("Flowga")
-tempScreen = pygame.display.set_mode((800, 600))
 tempScreen.fill('#ffffff')
 
 # Update the screen
