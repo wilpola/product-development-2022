@@ -44,35 +44,51 @@ class Button():
 
         # Set up "Label"
         self.label      = primaryFont.render(self.label, True, self.fntColor)
-        self.textArea   = self.label.get_rect(center = self.buttonSurface.center) 
+        self.textArea   = self.label.get_rect(center = self.buttonSurface.center)
+    
+    # Return [ True / False] whether hovering on the button
+    def isHovered(self):
 
+         # Get mouse position
+        mouse = pygame.mouse.get_pos()
+        
+        # Check if mouse is on top of the button
+        if self.buttonSurface.collidepoint(mouse):  
+            return True
+        else:
+            return False
+
+    # Action: What should happen when hovered?
+    def buttonHover(self):
+        # 
+        if self.isHovered():
+            self.buttonColor = (240, 0, 100)
+        else:
+            self.buttonColor = self.stored['buttonColor']
 
     def handleClick(self):
         # Get mouse position
-        mouse = pygame.mouse.get_pos()
+        # mouse = pygame.mouse.get_pos()
 
-        if self.buttonSurface.collidepoint(mouse):
-            self.buttonColor = (240, 0, 100)
-
+        if self.isHovered():
+            # print('hovering')
+            self.buttonHover()
             if pygame.mouse.get_pressed()[0]:
                 self.pressed = True
             else:
                 if self.pressed == True:
                     self.pressed = False
-                    self.clicked = True
-                    print(self.stored["label"], "was printed")
-                    
-                    if self.stored["label"] == 'HELP':
-                        pygame.quit()
-                        sys.exit()
-
+    
         else:
-            self.buttonColor = self.stored["buttonColor"]
-            self.fntColor = self.stored['fntColor']
+            self.buttonHover()
 
-
+    # Draw the Button to the screen
     def DrawButton(self):
         pygame.draw.rect(self.loc, self.buttonColor, self.buttonSurface, border_radius = self.radius)
         self.loc.blit(self.label, self.textArea)
+        
+        # Click Events 
+        # TODO: This may get deleted, as it may not be necessary
         self.handleClick()
+        # self.buttonHover()
         pygame.display.update()
