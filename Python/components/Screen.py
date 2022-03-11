@@ -6,16 +6,17 @@ class Screen():
     def __init__(self, caption="Screen", bg="#ffffff"):
         super().__init__
 
+        # Get display data from settings
+        with open("Python/settings.json", "r") as j:
+            self.data = json.loads(j.read())
+        j.close()
+        
         # Set up local variables
         self.fullscreen = self.data['fullscreen']
         self.caption    = caption
         self.Active     = False
         self.bg         = bg
 
-        # Get display data from settings
-        with open("Python/settings.json", "r") as j:
-            self.data = json.loads(j.read())
-        j.close()
 
     # Function to Activate the screen
     def activateScreen(self):
