@@ -13,15 +13,21 @@ from components.Button import Button
 pygame.init()
 pygame.font.init()
 
-# Get settings
-try:    # Try to read settings from file
-    with open("Python/settings.json", "r") as settings:
-        data = json.loads(settings.read())
-    settings.close()
+# -- Settings Retrieval -- #
+# Make sure that settings have been compiled before
+# running the game
+settings = False
+while not settings:
+    if os.path.exists("Python/settings.json"):
+        settings = True
+    else:
+        x = FirstLaunch()
+        x.compileSettings()
 
-except: # If not found, compile settings
-    x = FirstLaunch()
-    x.compileSettings()
+with open("Python/settings.json", "r") as s_file:
+    data = json.loads(s_file.read())
+s_file.close()
+# -- End of Settings Retrieval -- #
     
 # Initialize local variables
 clock       = pygame.time.Clock()
