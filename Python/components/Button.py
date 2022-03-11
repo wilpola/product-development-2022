@@ -25,14 +25,14 @@ class Button():
         # This is a local copy of all the elements, if they were to change during 
         # the lifecycle of a given button component
         self.stored = { 
-            "label": f"{label}",
-            "loc": f"{loc}", 
-            "bg": f"{bg}", 
-            "x": f"{x}", 
-            "y": f"{y}", 
-            "w": f"{w}", 
-            "fntColor": f"{fntColor}", 
-            "buttonColor": f"{bg}" 
+            "buttonColor":  f"{bg}", 
+            "fntColor":     f"{fntColor}", 
+            "label":        f"{label}",
+            "loc":          f"{loc}", 
+            "bg":           f"{bg}", 
+            "x":            f"{x}", 
+            "y":            f"{y}", 
+            "w":            f"{w}", 
         }
 
         # "": f"{}",
