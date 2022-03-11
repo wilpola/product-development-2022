@@ -36,7 +36,7 @@ logoFont    = pygame.font.SysFont("Roboto", 120)
 
 # Create separate screens
 # Create mainMenu screen
-mainMenuScreen = Screen("Main Menu | Flowga", bg='#4a4a4a')
+mainMenuScreen = Screen("Main Menu | Flowga", bg='#ffffff')
 mainMenuScreen.activateScreen() # Set MainMenu active when game is launched
 
 # Create mainMenu screen
@@ -69,14 +69,8 @@ quitButton = Button(
     y = (data['height']  / 2 + 180)
 )
 
+# Update the screen
 def updateScreen():
-    startButton.DrawButton()
-    statsButton.DrawButton()
-    optionsButton.DrawButton()
-    quitButton.DrawButton()
-
-    
-    # Update the screen
     pygame.display.update()
 
 # Create Gameloop
@@ -87,42 +81,49 @@ while game:
 
     # Call screen updater
     updateScreen()
+    mouse = pygame.mouse.get_pos()
 
-    # MainMenu Content
-    if mainMenuScreen.isActive():
-        logo = logoFont.render("Flowga", True, (0, 220, 140))
-        version = primaryFont.render("v1.2", True, (100, 100, 120))
-        lWidth = logo.get_width()
-
-        mainMenuScreen.blit(logo, (data['width'] / 2 - lWidth / 2, 150))
-        mainMenuScreen.blit(version, (data['width'] / 2 + 110, 215))
-        for e in pygame.event.get():
-            if e.type == pygame.KEYDOWN:
-                if e.key == pygame.K_1:
-                    mainMenuScreen.deactivateScreen()
-                    settingsScreen.activateScreen()
-
-    # Settings Content
-    if settingsScreen.isActive():
-        for e in pygame.event.get():
-            if e.type == pygame.KEYDOWN:
-                if e.key == pygame.K_1:
-                    settingsScreen.deactivateScreen()
-                    mainMenuScreen.activateScreen()
-    # Eventlistener for the game loop
-    for e in pygame.event.get():
-
-        # Track mouse location
-        
-        # On window close
+    def bye():
         if e.type == pygame.QUIT:
             # TODO: Add confirmation sequence
             pygame.quit()
             sys.exit()
+
+    # MainMenu Content
+    if mainMenuScreen.isActive():
+        logo = logoFont.render("Flowga", True, (0, 220, 140))
+        version = primaryFont.render("alpha-1.2", True, (100, 100, 120))
+        lWidth = logo.get_width()
+
+        mainMenuScreen.blit(logo, (data['width'] / 2 - lWidth / 2, 150))
+        mainMenuScreen.blit(version, (data['width'] / 2 - 140, 220))
         
-        # Key press events
-        if e.type == pygame.KEYDOWN:
-            # TODO: Remove before production
-            if e.key == pygame.K_ESCAPE:
-                pygame.quit()
-                sys.exit()
+        startButton.DrawButton()
+        statsButton.DrawButton()
+        optionsButton.DrawButton()
+        quitButton.DrawButton()
+
+    # Main Menu Eventlistener
+        for e in pygame.event.get():
+            bye()
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_1:
+                    mainMenuScreen.deactivateScreen()
+                    settingsScreen.activateScreen()
+            
+            # Click events
+            if optionsButton.isHovered() and e.type == pygame.MOUSEBUTTONUP:
+                mainMenuScreen.deactivateScreen()
+                settingsScreen.activateScreen()
+
+    # -- END OF MAIN MENU -- #
+
+    # Settings Content
+    if settingsScreen.isActive():
+        for e in pygame.event.get():
+            bye()
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_ESCAPE:
+                    settingsScreen.deactivateScreen()
+                    mainMenuScreen.activateScreen()
+    # -- END OF Settings Screen -- #
