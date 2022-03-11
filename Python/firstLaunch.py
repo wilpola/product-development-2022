@@ -32,7 +32,7 @@ class FirstLaunch():
 
         # Save height
         self.height = nativeDimensions[1]
-        self.data['heigt'] = self.height
+        self.data['height'] = self.height
 
         # List of supported resolutions
         self.resolutionList = pygame.display.list_modes()
