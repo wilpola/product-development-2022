@@ -17,7 +17,6 @@ class Screen():
         self.Active     = False
         self.bg         = bg
 
-
     # Function to Activate the screen
     def activateScreen(self):
         # Set the window Active
@@ -38,7 +37,7 @@ class Screen():
         # Set screen background
         self.screen.fill(self.bg)
 
-    #   Function to Deactivate the screen
+    # Function to Deactivate the screen
     def deactivateScreen(self):
         # Set window Unactive
         self.Active = False
