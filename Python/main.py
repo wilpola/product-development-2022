@@ -46,30 +46,64 @@ startScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
 settingsScreen = Screen("Settings | Flowga", bg='#ffffff')
 
 # Create Buttons
-
 startButton = Button(
     mainMenuScreen.screen, 
     'Start', 
     x = (data['width'] / 2 - 50),
     y = (data['height']  / 2)
 )
+
 statsButton = Button(
     mainMenuScreen.screen, 
     'Stats', 
     x = (data['width'] / 2 - 50),
     y = (data['height']  / 2 + 60)
 )
+
 optionsButton = Button(
     mainMenuScreen.screen, 
     'Options', 
     x = (data['width'] / 2 - 50),
     y = (data['height']  / 2 + 120)
 )
+
 quitButton = Button(
     mainMenuScreen.screen, 
     'Quit', 
     x = (data['width'] / 2 - 50),
     y = (data['height']  / 2 + 180)
+)
+
+easyButton = Button(
+    mainMenuScreen.screen, 
+    'Beginner', 
+    x = (data['width'] / 3 - 100), 
+    y = (data['height']  / 2 ), 
+    w=200
+)
+
+intermediateButton = Button(
+    mainMenuScreen.screen, 
+    'Intermediate', 
+    x = (data['width'] / 2 - 100),
+    y = (data['height']  / 2),
+    w=200
+)
+
+experiencedButton = Button(
+    mainMenuScreen.screen, 
+    'Experienced', 
+    x = (data['width'] / 2 + (data['width'] / 6) - 100),
+    y = (data['height']  / 2),
+    w=200
+)
+
+backButton = Button(
+    mainMenuScreen.screen, 
+    'back', 
+    x = (data['width'] / 2 - 100),
+    y = (data['height']  - 200),
+    w=200
 )
 
 # Update the screen
@@ -123,24 +157,55 @@ while game:
                 mainMenuScreen.deactivateScreen()
                 settingsScreen.activateScreen()
 
+            if quitButton.isHovered() and e.type == pygame.MOUSEBUTTONUP:
+                pygame.quit()
+                sys.exit()
+
     # -- END OF MAIN MENU -- #
 
     # -- Start Screen sequence -- #
     if startScreen.isActive():
-        header = primaryFont.render(startScreen.caption, True, (244, 244, 244), startScreen.bg)
-        startScreen.blit(header,(data['width'] / 2 - lWidth / 2, 50))
+
+        header = primaryFont.render("Choose a difficulty", True, (244, 244, 244), startScreen.bg)
+        hwidth = header.get_width()
+  
+        startScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
         pygame.display.update()
+
+        easyButton.DrawButton()
+        intermediateButton.DrawButton()
+        experiencedButton.DrawButton()
+        backButton.DrawButton()
+
+
         for e in pygame.event.get():
             bye()
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_ESCAPE:
                     startScreen.deactivateScreen()
                     mainMenuScreen.activateScreen()
+            
+            if (easyButton.isHovered() and 
+                    e.type == pygame.MOUSEBUTTONUP):
+                pass
+
+            if (intermediateButton.isHovered() and 
+                    e.type == pygame.MOUSEBUTTONUP):
+                pass
+
+            if (backButton.isHovered() and 
+                    e.type == pygame.MOUSEBUTTONUP):
+
+                startScreen.deactivateScreen()
+                mainMenuScreen.activateScreen()
 
     # -- End of Start Screen sequence -- #
 
     # Settings Content
     if settingsScreen.isActive():
+        header = primaryFont.render("Settings", True, ("#333333"), settingsScreen.bg)
+        hwidth = header.get_width()
+        settingsScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
         for e in pygame.event.get():
             bye()
             if e.type == pygame.KEYDOWN:
