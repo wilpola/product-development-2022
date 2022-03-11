@@ -29,6 +29,7 @@ logoFont    = pygame.font.SysFont("Roboto", 120)
 # Temporary pygame elements
 pygame.display.set_caption("Flowga")
 tempScreen = pygame.display.set_mode((800, 600))
+tempScreen.fill('#ffffff')
 
 # Update the screen
 pygame.display.update()
