@@ -4,10 +4,23 @@
 # Import modules
 import json, sys, os, pygame
 
+#import FirstLaunch file
+from firstLaunch import FirstLaunch
+
 # Initialize pygame components
 pygame.init()
 pygame.font.init()
 
+# Get settings
+try:    # Try to read settings from file
+    with open("Python/settings.json", "r") as settings:
+        data = json.loads(settings.read())
+    settings.close()
+
+except: # If not found, compile settings
+    x = FirstLaunch()
+    x.compileSettings()
+    
 # Initialize local variables
 clock       = pygame.time.Clock()
 primaryFont = pygame.font.SysFont("Roboto", 32)
