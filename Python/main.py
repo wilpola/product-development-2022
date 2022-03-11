@@ -39,6 +39,9 @@ logoFont    = pygame.font.SysFont("Roboto", 120)
 mainMenuScreen = Screen("Main Menu | Flowga", bg='#ffffff')
 mainMenuScreen.activateScreen() # Set MainMenu active when game is launched
 
+# Create start screen
+startScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
+
 # Create mainMenu screen
 settingsScreen = Screen("Settings | Flowga", bg='#ffffff')
 
@@ -91,8 +94,8 @@ while game:
 
     # MainMenu Content
     if mainMenuScreen.isActive():
-        logo = logoFont.render("Flowga", True, (0, 220, 140))
-        version = primaryFont.render("alpha-1.2", True, (100, 100, 120))
+        logo = logoFont.render("Flowga", True, (0, 220, 140), mainMenuScreen.bg)
+        version = primaryFont.render("alpha-1.2", True, (100, 100, 120), mainMenuScreen.bg)
         lWidth = logo.get_width()
 
         mainMenuScreen.blit(logo, (data['width'] / 2 - lWidth / 2, 150))
@@ -112,11 +115,29 @@ while game:
                     settingsScreen.activateScreen()
             
             # Click events
+            if startButton.isHovered() and e.type == pygame.MOUSEBUTTONUP:
+                mainMenuScreen.deactivateScreen()
+                startScreen.activateScreen()
+
             if optionsButton.isHovered() and e.type == pygame.MOUSEBUTTONUP:
                 mainMenuScreen.deactivateScreen()
                 settingsScreen.activateScreen()
 
     # -- END OF MAIN MENU -- #
+
+    # -- Start Screen sequence -- #
+    if startScreen.isActive():
+        header = primaryFont.render(startScreen.caption, True, (244, 244, 244), startScreen.bg)
+        startScreen.blit(header,(data['width'] / 2 - lWidth / 2, 50))
+        pygame.display.update()
+        for e in pygame.event.get():
+            bye()
+            if e.type == pygame.KEYDOWN:
+                if e.key == pygame.K_ESCAPE:
+                    startScreen.deactivateScreen()
+                    mainMenuScreen.activateScreen()
+
+    # -- End of Start Screen sequence -- #
 
     # Settings Content
     if settingsScreen.isActive():
