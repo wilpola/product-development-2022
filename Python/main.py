@@ -6,6 +6,7 @@ import json, sys, os, pygame
 
 #import FirstLaunch file
 from firstLaunch import FirstLaunch
+from components.Screen import Screen
 
 # Initialize pygame components
 pygame.init()
@@ -26,15 +27,19 @@ clock       = pygame.time.Clock()
 primaryFont = pygame.font.SysFont("Roboto", 32)
 logoFont    = pygame.font.SysFont("Roboto", 120) 
 
-# Address fullscreen flag
-if data['fullscreen'] == True:
-    tempScreen = pygame.display.set_mode((data['width'], data['height']), pygame.FULLSCREEN)
-else:
-    tempScreen = pygame.display.set_mode((800, 600))
+# # Address fullscreen flag
+# if data['fullscreen'] == True:
+#     tempScreen = pygame.display.set_mode((data['width'], data['height']), pygame.FULLSCREEN)
+# else:
+#     tempScreen = pygame.display.set_mode((800, 600))
 
-# Temporary pygame elements
-pygame.display.set_caption("Flowga")
-tempScreen.fill('#ffffff')
+
+# # Temporary pygame elements
+# pygame.display.set_caption("Flowga")
+# tempScreen.fill('#ffffff')
+
+mainMenuScreen = Screen("Main Menu | Flowga", bg='#4a4a4a')
+mainMenuScreen.activateScreen()
 
 # Update the screen
 pygame.display.update()
