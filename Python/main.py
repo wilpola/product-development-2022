@@ -31,6 +31,7 @@ if data['fullscreen'] == True:
     tempScreen = pygame.display.set_mode((data['width'], data['height']), pygame.FULLSCREEN)
 else:
     tempScreen = pygame.display.set_mode((800, 600))
+
 # Temporary pygame elements
 pygame.display.set_caption("Flowga")
 tempScreen.fill('#ffffff')
