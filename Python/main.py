@@ -20,7 +20,6 @@ tempScreen = pygame.display.set_mode((800, 600))
 # Update the screen
 pygame.display.update()
 
-
 # Create Gameloop
 game = True
 while game:
