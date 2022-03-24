@@ -1,10 +1,10 @@
 import json, sys, pygame
+# import pygame_menu
 
 class Screen():
 
     # Initialize constructor
     def __init__(self, caption="Screen", bg="#ffffff"):
-        super().__init__
 
         # Get display data from settings
         with open("Python/settings.json", "r") as j:
@@ -37,6 +37,9 @@ class Screen():
         # Set screen background
         self.screen.fill(self.bg)
 
+    def setCaption(self):
+        pygame.display.set_caption(self.caption)
+
     # Function to Deactivate the screen
     def deactivateScreen(self):
         # Set window Unactive
@@ -63,3 +66,6 @@ class Screen():
     # Blitting function, to place buttons and other items on to the screen
     def blit(self, surf, loc):
         self.screen.blit(surf, loc)
+
+    def fill(self):
+        self.screen.fill(self.bg)
