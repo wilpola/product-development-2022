@@ -251,7 +251,7 @@ while game:
 
     # Main Menu Eventlistener
         for e in pygame.event.get():
-            # bye()
+            bye()
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_1:
                     mainMenuScreen.deactivateScreen()
