@@ -6,15 +6,17 @@ import sys
 pygame.init()
 
 class Button():
-    def __init__(self, loc, label="Label", x=100, y=100, w=100, h=35, bg="#333333", fntColor='#ffffff', radius = 5):
+    def __init__(self, loc, label="Label", x=100, y=100, w=100, h=35, bg="#333333", fntColor='#ffffff', radius = 5, font= 'primary'):
         super().__init__
-        print('Button was imported')
+        # print('Button was imported')
         primaryFont = pygame.font.SysFont("Sans-serif", 22) 
+        largeFont = pygame.font.SysFont("Sans-serif", 32) 
 
         # Set up local content
         self.fntColor   = fntColor
         self.radius     = radius
         self.label      = label
+        self.font       = font
         self.loc        = loc
         self.bg         = bg
         self.x          = x
@@ -43,8 +45,14 @@ class Button():
         self.pressed        = False            # This is to handle click events
 
         # Set up "Label"
-        self.label      = primaryFont.render(self.label, True, self.fntColor)
+        if self.font == 'primary':
+            self.label      = primaryFont.render(self.label, True, self.fntColor)
+        elif self.font == 'L':
+            self.label       = largeFont.render(self.label, True, self.fntColor)
         self.textArea   = self.label.get_rect(center = self.buttonSurface.center)
+        # self.cursor     = pygame.image.load('Python/assets/target.png').convert()
+        # self.curRect    = self.cursor.get_rect()
+        
     
     # Return [ True / False] whether hovering on the button
     def isHovered(self):
