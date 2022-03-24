@@ -28,11 +28,11 @@ class FirstLaunch():
 
         # save width
         self.width = nativeDimensions[0]
-        self.data['width'] = 1000
+        self.data['width'] = 1440
 
         # Save height
         self.height = nativeDimensions[1]
-        self.data['height'] = 600
+        self.data['height'] = 800
 
         # List of supported resolutions
         self.resolutionList = pygame.display.list_modes()
@@ -44,11 +44,13 @@ class FirstLaunch():
         self.data['fullscreen'] = self.fullscreen
 
         # Volume Control [ 0 - 10 ]
-        self.data['volume'] = 5
+        self.data['volume'] = 0.3
 
         # Animations
         # As we don't have any, this is set to False
         self.data['animations'] = False
+
+        self.data['light'] = True
 
         # Write changes to file
         self.writeSettings()
