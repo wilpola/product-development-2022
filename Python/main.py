@@ -137,24 +137,27 @@ shortButton = Button(
     mainMenuScreen.screen, 
     'Short', 
     x = (data['width'] / 3 - 100), 
-    y = (data['height']  / 2 ), 
-    w=200
+    y = (data['height']  / 2 - 150 ), 
+    w=200,
+    h=300
 )
 
 mediumButton = Button(
     mainMenuScreen.screen, 
     'Medium', 
     x = (data['width'] / 2 - 100),
-    y = (data['height']  / 2),
-    w=200
+    y = (data['height']  / 2 - 150),
+    w=200,
+    h=300
 )
 
 longButton = Button(
     mainMenuScreen.screen, 
     'Long', 
     x = (data['width'] / 2 + (data['width'] / 6) - 100),
-    y = (data['height']  / 2),
-    w=200
+    y = (data['height']  / 2 - 150),
+    w=200,
+    h=300
 )
 screen_center = data['width'] / 2
 vol_down = Button(mainMenuScreen.screen, '<', screen_center + 10, 140, 40, 40, "#4a4a4a", "#ffffff", radius=8)
@@ -396,6 +399,8 @@ while game:
         settingsScreen.blit(vol_text, (400, 150))
         settingsScreen.blit(vol_value_text, (screen_center + 80, 150))
 
+        backButton.DrawButton()
+
 
         def openSettings():
             with open('Python/settings.json', "r") as s:
@@ -451,6 +456,10 @@ while game:
                     data['volume'] = round(data['volume'], 1)
                     pygame.mixer.music.set_volume(data['volume'])
                     updateVolume()
+
+            if (backButton.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                settingsScreen.deactivateScreen()
+                mainMenuScreen.activateScreen()
 
                 updateScreen()
     # -- END OF Settings Screen -- #
