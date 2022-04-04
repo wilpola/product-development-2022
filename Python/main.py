@@ -17,6 +17,8 @@ pygame.init()
 pygame.font.init()
 pygame.mixer.init()
 
+pygame.mixer.music.set_volume(0) # Init with zero volume, and change vol during settings load
+
 mixer.music.load('Python/assets/main_menu_v3.ogg')
 mixer.music.play(-1)
 
