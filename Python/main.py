@@ -62,9 +62,9 @@ pygame.mixer.music.set_volume(data['volume'])
 mainMenuScreen.activateScreen() # Set MainMenu active when game is launched
 
 # Create start screen
-startScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
-lengthScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
-statsScreen = Screen('Stats | Flowga', bg="#4a4a4a")
+startScreen = Screen(bg="#4a4a4a")
+lengthScreen = Screen(bg="#4a4a4a")
+statsScreen = Screen(bg="#4a4a4a")
 
 # Create mainMenu screen
 settingsScreen = Screen("Settings | Flowga", bg='#ffffff')
@@ -540,36 +540,58 @@ while game:
                 end_wo = Button(cardScreen.screen, '<-- End workout', 40, 40, 150, bg="#DD4D2E")
             else:
                 end_wo = Button(cardScreen.screen, 'End workout', 40, 40, 150, bg="#DD4D2E")
+            
+            if len(workoutList) >= 10:
+                if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                    # cardScreen.fill()
+                    if activeCard == len(workoutList) - 1:
+                        activeCard = 0
+                        cardScreen.fill()
+                        # pygame.display.update()
+                        updateId = True
 
-            if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                # cardScreen.fill()
-                if activeCard == len(workoutList) - 1:
-                    activeCard = 0
-                    cardScreen.fill()
+                    else:
+                        activeCard += 1
+                        updateId = True
+
+                if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                     # pygame.display.update()
-                    updateId = True
+                    if activeCard == 0:
+                        activeCard = len(workoutList) - 1
+                        updateId = True
 
+                    elif activeCard == 9:
+                        activeCard -= 1
+                        cardScreen.fill()
+                        # pygame.display.update()
+                        updateId = True
+
+                    else:
+                        activeCard -= 1
+                        updateId = True
                 else:
-                    activeCard += 1
-                    updateId = True
-
-            if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                # pygame.display.update()
-                if activeCard == 0:
-                    activeCard = len(workoutList) - 1
-                    updateId = True
-
-                elif activeCard == 9:
-                    activeCard -= 1
-                    cardScreen.fill()
-                    # pygame.display.update()
-                    updateId = True
-
-                else:
-                    activeCard -= 1
-                    updateId = True
+                    pass
             else:
-                pass
+                if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                    if activeCard == len(workoutList) - 1:
+                        activeCard = 0
+                        updateId = True
+
+                    else:
+                        activeCard += 1
+                        updateId = True
+
+                if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                    if activeCard == 0:
+                        activeCard = len(workoutList) - 1
+                        updateId = True
+
+                    else:
+                        activeCard -= 1
+                        updateId = True
+                else:
+                    pass
+
 
 
             

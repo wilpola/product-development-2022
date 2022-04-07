@@ -4,7 +4,7 @@ import json, sys, pygame
 class Screen():
 
     # Initialize constructor
-    def __init__(self, caption="Screen", bg="#ffffff"):
+    def __init__(self, caption="Flowga", bg="#ffffff"):
 
         # Get display data from settings
         with open("Python/settings.json", "r") as j:
