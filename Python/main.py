@@ -50,6 +50,8 @@ logoFont    = pygame.font.SysFont("Roboto", 120)
 # x = testScreen(caption="hello there", background="#ffffff")
 mainMenuScreen = Screen("Main Menu | Flowga", bg='#ffffff')
 
+updateId = True
+
 # Music for the menu sequence etc.
 menuMusic = mixer.music.load('Python/assets/main_menu_v3.ogg')
 mixer.music.play(-1)    # set music to loop [ -1  = LOOP ]
@@ -469,11 +471,11 @@ while game:
     # CardScreen
     if cardScreen.isActive():
         # cardScreen.fill()
+
         header = primaryFont.render("Cards", True, ("#333333"), cardScreen.bg)
         hwidth = header.get_width()
 
         cardScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
-
 
         try:
             with open("Python/asanas.json", "r") as a:
@@ -490,12 +492,17 @@ while game:
             
             y = 250
 
+            
+
         main_card = Button(cardScreen.screen, f"Asana #{str(workoutList[activeCard]['asana_id'])}", screen_center - 150, data['height'] / 2 - 300, 300, 400, radius=15, font = 'L')
         card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
         card_id_width = card_id.get_width()
         card_rect = card_id.get_rect()
 
-        cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+        if updateId:
+            cardScreen.fill()
+            cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+            updateId = False
         end_wo.DrawButton()
         prev_btn.DrawButton()
         next_btn.DrawButton()
@@ -518,54 +525,57 @@ while game:
                     lengthScreen.activateScreen()
                     asanaPrint = True
                     workoutList = []
+                    activeCard = 0
 
             if (end_wo.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                 cardScreen.deactivateScreen()
                 mainMenuScreen.activateScreen()
                 asanaPrint = True
                 workoutList = []
+                activeCard = 0
 
             if end_wo.isHovered():
                 end_wo = Button(cardScreen.screen, '<-- End workout', 40, 40, 150, bg="#DD4D2E")
-                pygame.display.flip()
+                
             else:
                 end_wo = Button(cardScreen.screen, 'End workout', 40, 40, 150, bg="#DD4D2E")
-                pygame.display.flip()
 
             if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                cardScreen.fill()
 
                 if activeCard == len(workoutList) - 1:
                     activeCard = 0
+                    updateId = True
                 
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
+                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
 
 
 
                 else:
                     activeCard += 1
+                    updateId = True
                     
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
+                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
 
             if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                cardScreen.fill()
 
 
                 if activeCard == 0:
                     activeCard = len(workoutList) - 1
+                    updateId = True
                     
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-                    cardScreen.fill()
+                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
+                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+                   
                     x.DrawButton()
 
                 else:
                     activeCard -= 1
+                    updateId = True
                     
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
+                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
                     x.DrawButton()
 
             else:
