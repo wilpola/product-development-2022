@@ -69,3 +69,4 @@ class Screen():
 
     def fill(self):
         self.screen.fill(self.bg)
+        pygame.display.flip()

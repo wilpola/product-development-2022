@@ -291,7 +291,7 @@ while game:
         hwidth = header.get_width()
   
         startScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
-        pygame.display.update()
+        # pygame.display.update()
 
         easyButton.DrawButton()
         intermediateButton.DrawButton()
@@ -341,7 +341,7 @@ while game:
   
         lengthScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
         lengthScreen.blit(choise1,(data['width'] / 2 - (cwidth / 2), 100))
-        pygame.display.update()
+        # pygame.display.update()
 
         shortButton.DrawButton()
         mediumButton.DrawButton()
@@ -500,9 +500,9 @@ while game:
         card_rect = card_id.get_rect()
 
         if updateId:
-            cardScreen.fill()
             cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
             updateId = False
+
         end_wo.DrawButton()
         prev_btn.DrawButton()
         next_btn.DrawButton()
@@ -524,6 +524,7 @@ while game:
                     cardScreen.deactivateScreen()
                     lengthScreen.activateScreen()
                     asanaPrint = True
+                    updateId = True
                     workoutList = []
                     activeCard = 0
 
@@ -531,59 +532,44 @@ while game:
                 cardScreen.deactivateScreen()
                 mainMenuScreen.activateScreen()
                 asanaPrint = True
+                updateId = True
                 workoutList = []
                 activeCard = 0
 
             if end_wo.isHovered():
                 end_wo = Button(cardScreen.screen, '<-- End workout', 40, 40, 150, bg="#DD4D2E")
-                
             else:
                 end_wo = Button(cardScreen.screen, 'End workout', 40, 40, 150, bg="#DD4D2E")
 
             if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-
+                # cardScreen.fill()
                 if activeCard == len(workoutList) - 1:
                     activeCard = 0
+                    cardScreen.fill()
+                    # pygame.display.update()
                     updateId = True
-                
-                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-
-
 
                 else:
                     activeCard += 1
                     updateId = True
-                    
-                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
 
             if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-
-
+                # pygame.display.update()
                 if activeCard == 0:
                     activeCard = len(workoutList) - 1
                     updateId = True
-                    
-                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-                   
-                    x.DrawButton()
+
+                elif activeCard == 9:
+                    activeCard -= 1
+                    cardScreen.fill()
+                    # pygame.display.update()
+                    updateId = True
 
                 else:
                     activeCard -= 1
                     updateId = True
-                    
-                    # card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    # cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-                    x.DrawButton()
-
             else:
                 pass
-
-        
-            
-            # cardScreen.fill()
 
 
             
@@ -621,3 +607,5 @@ while game:
                 if e.key == pygame.K_ESCAPE:
                     mainMenuScreen.activateScreen()
                     statsScreen.deactivateScreen()
+
+    updateScreen()
