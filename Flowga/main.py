@@ -1,11 +1,8 @@
-# @author: Medler Labs
-# @desc: This file combines all the runtime functions in a clean way
-
 import sys
 import pygame                   # import pygame lib
 import constants as c           # import all the defined constants
 from setup import setup         # import the setup function
-# from classes.RoudedButton import RoundedButton
+
 pygame.init()                   # initialize the pygame package
 
 setup()
