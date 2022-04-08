@@ -251,7 +251,7 @@ while game:
     # MainMenu Content
     if mainMenuScreen.isActive():
         logo = logoFont.render("Flowga", True, (0, 220, 140), mainMenuScreen.bg)
-        version = primaryFont.render("alpha-1.2", True, (100, 100, 120), mainMenuScreen.bg)
+        version = primaryFont.render("alpha-1.4", True, (100, 100, 120), mainMenuScreen.bg)
         lWidth = logo.get_width()
 
         mainMenuScreen.blit(logo, (data['width'] / 2 - lWidth / 2, 150))
