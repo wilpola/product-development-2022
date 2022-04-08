@@ -32,7 +32,7 @@ class Screen():
 
         # If not fullscreen
         if self.fullscreen  == False:
-            self.screen = pygame.display.set_mode((self.data["width"], self.data["height"]), depth=32)
+            self.screen = pygame.display.set_mode((self.data["width"], self.data["height"]), pygame.RESIZABLE, depth=32)
 
         # Set screen background
         self.screen.fill(self.bg)
@@ -61,7 +61,6 @@ class Screen():
 
         # Actually update the screen
         pygame.display.update()
-
     
     # Blitting function, to place buttons and other items on to the screen
     def blit(self, surf, loc):
