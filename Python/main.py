@@ -236,7 +236,7 @@ def updateScreen():
 game = True
 while game:
     # Set refresh rate
-    clock.tick(240)     # TODO: Make this dynamic
+    clock.tick(360)     # TODO: Make this dynamic
 
     # Call screen updater
     updateScreen()
@@ -403,7 +403,7 @@ while game:
         # vol_value_bg = vol_value_text.get_rect()
         # vol_value_bg.center = (screen_center)
 
-        resolution_text = primaryFont.render("resolution", True, ('#333333'), settingsScreen.bg)
+        resolution_text = primaryFont.render("Resolution", True, ('#333333'), settingsScreen.bg)
         resolution_txt_width = resolution_text.get_width()
         resolution_value_text = primaryFont.render(str(data['resolutionList'][index][0]) + " x " + str(data['resolutionList'][index][1]), True, ("#333333"), settingsScreen.bg)
 
@@ -562,8 +562,6 @@ while game:
             
             y = 250
 
-            
-
         main_card = Button(cardScreen.screen, f"Asana #{str(workoutList[activeCard]['asana_id'])}", screen_center - 150, data['height'] / 2 - 300, 300, 400, radius=15, font = 'L')
         card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
         card_id_width = card_id.get_width()
@@ -573,6 +571,7 @@ while game:
             cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
             updateId = False
 
+        pygame.display.update(card_rect)
         end_wo.DrawButton()
         prev_btn.DrawButton()
         next_btn.DrawButton()
@@ -588,7 +587,6 @@ while game:
             x = Button(cardScreen.screen, f"{str(workoutList[int(1 + i)]['asana_id'])}", screen_center - 340 / 2 + z, data['height'] - 200, h = 100)
             x.DrawButton()
             z += 120
-
         
         for e in pygame.event.get():
             bye()
@@ -601,6 +599,24 @@ while game:
                     updateId = True
                     workoutList = []
                     activeCard = 0
+
+                if e.key == pygame.K_RIGHT:
+                    updateId = True
+                    if activeCard == len(workoutList) - 1:
+                        activeCard = 0
+                        cardScreen.fill()
+                    else:
+                        activeCard += 1
+
+                if e.key == pygame.K_LEFT:
+                    updateId = True
+                    if activeCard == 0:
+                        activeCard = len(workoutList) - 1
+                    elif activeCard == 9:
+                        activeCard -= 1
+                        cardScreen.fill()
+                    else:
+                        activeCard -= 1
 
             if (end_wo.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                 cardScreen.deactivateScreen()
@@ -629,45 +645,19 @@ while game:
                         updateId = True
 
                 if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                    # pygame.display.update()
+                    updateId = True
                     if activeCard == 0:
                         activeCard = len(workoutList) - 1
-                        updateId = True
 
                     elif activeCard == 9:
                         activeCard -= 1
                         cardScreen.fill()
                         # pygame.display.update()
-                        updateId = True
 
                     else:
                         activeCard -= 1
-                        updateId = True
                 else:
                     pass
-            else:
-                if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                    if activeCard == len(workoutList) - 1:
-                        activeCard = 0
-                        updateId = True
-
-                    else:
-                        activeCard += 1
-                        updateId = True
-
-                if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                    if activeCard == 0:
-                        activeCard = len(workoutList) - 1
-                        updateId = True
-
-                    else:
-                        activeCard -= 1
-                        updateId = True
-                else:
-                    pass
-
-
-
             
     # -- END OF Settings Screen -- #
 
