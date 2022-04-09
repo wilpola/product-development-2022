@@ -6,6 +6,7 @@ import "./flowga-app.scss";
 const FlowgaApp = () => {
   const [username, setUsername] = useState("");
   const [formError, setFormError] = useState(false);
+  const [workouts, updateWorkouts] = useState([]);
 
   const time = new Date();
   //   console.log(time.toLocaleDateString("default", { dateStyle: "short" }));
@@ -28,6 +29,7 @@ const FlowgaApp = () => {
       state = false;
     } else {
       setUsername(data.username);
+      updateWorkouts(data.workouts);
       state = true;
     }
   }, [state]);
@@ -87,19 +89,81 @@ const FlowgaApp = () => {
   } else {
     // if userExists
     const time = new Date();
-    let greeting = '';
-    console.log(time.toLocaleString('default', {dayPeriod: 'narrow'}));
 
-    if (time.toLocaleString('default', {dayPeriod: 'narrow'}) === "at night") {
-      greeting = "Hello, "
-    } else if (time.toLocaleString('default', {dayPeriod: 'narrow'}) === "in the afternoon") {
-      greeting = "Good afternoon, "
+    let greeting = "";
+    // console.log(time.toLocaleString("default", { dayPeriod: "narrow" }));
+
+    if (
+      time.toLocaleString("default", { dayPeriod: "narrow" }) === "at night"
+    ) {
+      greeting = "Hello, ";
+    } else if (
+      time.toLocaleString("default", { dayPeriod: "narrow" }) ===
+      "in the afternoon"
+    ) {
+      greeting = "Good afternoon, ";
     } else {
-      greeting = "Good morning, "
+      greeting = "Good morning, ";
     }
+
+    const addworkout = () => {
+      //data
+      let d = JSON.parse(localStorage.getItem("flowga-app"));
+      //dateTIME
+      let t = new Date();
+      console.log(t.toISOString());
+
+      let w = {
+        title: "Afternoon workout",
+        t: t,
+        diff: "easy",
+        length: 120,
+        notes: "Everything was fine",
+      };
+      d.workouts.unshift(w);
+
+      updateWorkouts((prevState) => [w, ...prevState]);
+      let newEntry = data.workouts.unshift(w);
+
+      localStorage.setItem("flowga-app", JSON.stringify(data));
+    };
+
+    const DateChange = (date) => {
+      let d = date;
+      let t = new Date(d);
+      console.log(t.toLocaleDateString("default", { dateStyle: "short" }));
+      return t.toLocaleDateString("default", { dateStyle: "short" });
+    };
     return (
       <div className='flowga-app-container'>
-        <h2> {greeting + cap(username)} </h2>
+        <div id='app-content'>
+          <h2 className='greeting'> {greeting + cap(username)} </h2>
+          <div className='activity-container'>
+            <h3 className='recent-activity'> Recent activity</h3>
+            <button onClick={() => addworkout()}> click me</button> <br />
+            {workouts.length > 0
+              ? workouts.map((item, index) => {
+
+                const addClass = (x) => {
+                  if (x === 'easy' ) {
+                    return <p className='act-difficulty easy'>{item.diff}</p>;
+                  } else if ( x === 'medium'){
+                    return <p className='act-difficulty medium'>{item.diff}</p>;
+                  } else {
+                    return <p className='act-difficulty hard'>{item.diff}</p>;
+                  }
+                }
+                  return (
+                    <div key={index} className='act-card'>
+                      <h3>{item.title}</h3>
+                        {addClass(item.diff)}
+                      <p>{DateChange(item.t)}</p>
+                    </div>
+                  );
+                })
+              : ""}
+          </div>
+        </div>
       </div>
     );
   }

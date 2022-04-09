@@ -1,3 +1,6 @@
+* {
+  text-align: left;
+}
 .FirstTime-container {
   max-width: 500px;
   margin: calc(50vh - 265px) auto 0;
@@ -26,10 +29,11 @@
       border-radius: 4px;
     }
     input:focus {
-        outline:none;
+      outline: none;
     }
 
     button {
+        text-align: center;
       font-size: 1rem;
       margin-top: 15px;
       width: 60%;
@@ -51,5 +55,72 @@
     pointer-events: none;
     background: #efefef;
   }
+}
 
+@media screen and (min-width: 780px) {
+  .flowga-app-container {
+    margin: 0 auto;
+    max-width: 1920px;
+    #app-content {
+      margin: 40px;
+      height: calc(100vh - 65px - 80px);
+      width: calc(100% - 80px);
+      display: grid;
+      grid-template-columns: 1fr 1fr minmax(150px, 400px);
+      grid-template-areas:
+        "greeting greeting activity"
+        "today today activity"
+        "stats stats activity"
+        "stats stats activity";
+      h2.greeting {
+        margin: 0;
+        padding: 0;
+      }
+      .activity-container {
+        position: relative;
+        width: calc(100% - 40px);
+        height: calc(100% - 40px);
+        grid-area: activity;
+        background-color: #094ea8;
+        border-radius: 12px;
+        padding: 20px;
+        color: white;
+
+        .act-card {
+            // height: 70px;
+            position: relative;
+            background: #efefef;
+            color: #333;
+            * {
+                margin: 0;
+                padding: 0;
+            }
+            margin: 20px 0;
+            padding: 15px 20px;
+            border-radius: 8px ;
+
+            .act-difficulty {
+                position: absolute;
+                top: 15px;
+                right: 16px;
+                padding: 3px 8px;
+                border-radius: 4px;
+                &::before {
+                    content: "#"
+                }
+            }
+
+            .easy {
+                background: rgb(184, 223, 184);
+            }
+            .medium {
+                background: rgb(221, 223, 184);
+            }
+            .hard {
+                background: rgb(223, 193, 184);
+            }
+        }
+      }
+    }
+  }
 }
