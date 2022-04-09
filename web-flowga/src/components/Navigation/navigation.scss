@@ -1,0 +1,48 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+// BASIC styles
+.navigation-container {
+  font-family: "Roboto", sans-serif;
+  position: relative;
+  display: grid;
+  grid-template-columns: 8vw 1fr 2fr 8vw;
+  grid-template-areas: ". logo links .";
+  height: 65px;
+  line-height: 65px;
+  background-color: azure;
+
+  .nav-logo {
+    grid-area: logo;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333333;
+  }
+
+  .nav-links {
+    // line-height: ;
+    grid-area: links;
+    display: flex;
+    justify-content: flex-end;
+
+    a {
+      position: relative;
+      text-decoration: none;
+      color: #4a4a4a;
+      font-size: 1.1rem;
+      padding: 0 20px;
+      // background: green;
+      &:hover,  &::after {
+        border-bottom: 3px solid #333333;
+        margin-top: -3px;
+        // position: absolute;
+        // top: 0;
+        // left: 0;
+        z-index: 10;
+      }
+    }
+
+    .active {
+      color: red;
+      font-weight: 500;
+    }
+  }
+}

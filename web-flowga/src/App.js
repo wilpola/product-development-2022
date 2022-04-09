@@ -1,11 +1,19 @@
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Navigation, Home } from "./components";
 
-import './App.scss';
+import "./App.scss";
 
 function App() {
   return (
-    <div className="App">
-      <h2>Flowga</h2>
-    </div>
+    <Router>
+      <Navigation />
+      <div className='App'>
+        <Routes>
+          <Route exact path='/' element={<Home />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
