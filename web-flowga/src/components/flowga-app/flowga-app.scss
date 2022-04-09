@@ -1,0 +1,55 @@
+.FirstTime-container {
+  max-width: 500px;
+  margin: calc(50vh - 265px) auto 0;
+  // position: absolute;
+  align-items: center;
+  height: calc(100vh - 50vh + 200px);
+
+  .userForm-container {
+    background: #efefef;
+    min-height: 200px;
+    width: 100%;
+    margin: 0 auto 40px;
+    contain: content;
+
+    input {
+      margin-top: 30px;
+      padding: 10px 20px;
+      width: calc(60% - 40px);
+      font-size: 1rem;
+    }
+
+    .err,
+    input.err:focus,
+    .err.focused {
+      border: 2px red solid !important;
+      border-radius: 4px;
+    }
+    input:focus {
+        outline:none;
+    }
+
+    button {
+      font-size: 1rem;
+      margin-top: 15px;
+      width: 60%;
+      height: 40px;
+      border-radius: 1000px;
+      border: 2px solid #094ea8;
+      font-weight: 500;
+      color: #094ea8;
+      &:hover {
+        cursor: pointer;
+        background-color: #094ea8;
+        color: white;
+        color: #ff0000;
+      }
+    }
+  }
+  form:invalid button,
+  form:invalid button:hover {
+    pointer-events: none;
+    background: #efefef;
+  }
+
+}
