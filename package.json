@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "chart.js": "^3.7.1",
+    "react-id-generator": "^3.0.2"
+  }
+}
