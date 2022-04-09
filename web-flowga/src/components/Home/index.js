@@ -13,14 +13,13 @@ const Home = () => {
         {/* <div className='landing-content'> */}
         <h1 className='landing-header'> Connect with your body</h1>
         <p className='landing-body'>
-          Flowga is a yoga app that will generate a semi-randomized yoga workout
-          based on selected parameters.
+          Flowga is a yoga app that will generate a semi-randomized yoga workouts based on selected parameters. Stay in shape even when gyms are closed.
         </p>
         <div className='callToAction'>
           <Link className='btn' to='/flowga-app'>
             Try Flowga
           </Link>
-          <Link to='/documentation'> Learn More </Link>
+          <Link to='/documentation' className='learn-more'> Learn More </Link>
         </div>
         {/* </div> */}
         <div className='landing-image'>
