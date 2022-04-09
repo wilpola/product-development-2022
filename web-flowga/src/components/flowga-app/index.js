@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import nextId from "react-id-generator";
 
 // import styles
 import "./flowga-app.scss";
@@ -7,6 +8,8 @@ const FlowgaApp = () => {
   const [username, setUsername] = useState("");
   const [formError, setFormError] = useState(false);
   const [workouts, updateWorkouts] = useState([]);
+
+  let ids = nextId();
 
   const time = new Date();
   //   console.log(time.toLocaleDateString("default", { dateStyle: "short" }));
@@ -48,7 +51,6 @@ const FlowgaApp = () => {
   };
 
   if (state === false) {
-    console.log("first Time");
     return (
       <div className='FirstTime-container'>
         <form className='userForm-container' onSubmit={(e) => handleSubmit(e)}>
@@ -112,12 +114,25 @@ const FlowgaApp = () => {
       //dateTIME
       let t = new Date();
       console.log(t.toISOString());
+      console.log(ids);
+
+      function getDiff() {
+        let num = Math.floor(Math.random() * 3);
+        if (num === 1) {
+          return "medium";
+        } else if (num > 1) {
+          return "hard";
+        } else {
+          return "easy";
+        }
+      }
 
       let w = {
+        id: ids,
         title: "Afternoon workout",
         t: t,
-        diff: "easy",
-        length: 120,
+        diff: getDiff(),
+        length: Math.round(Math.random() * (1000 - 50) + 50),
         notes: "Everything was fine",
       };
       d.workouts.unshift(w);
@@ -143,20 +158,45 @@ const FlowgaApp = () => {
             <button onClick={() => addworkout()}> click me</button> <br />
             {workouts.length > 0
               ? workouts.map((item, index) => {
+                  const addClass = (x) => {
+                    if (x === "easy") {
+                      return <p className='act-difficulty easy'>{item.diff}</p>;
+                    } else if (x === "medium") {
+                      return (
+                        <p className='act-difficulty medium'>{item.diff}</p>
+                      );
+                    } else {
+                      return <p className='act-difficulty hard'>{item.diff}</p>;
+                    }
+                  };
+                  const removeWorkout = (e) => {
+                    const z = e.target.parentNode.getAttribute("name");
+                    console.log(z);
 
-                const addClass = (x) => {
-                  if (x === 'easy' ) {
-                    return <p className='act-difficulty easy'>{item.diff}</p>;
-                  } else if ( x === 'medium'){
-                    return <p className='act-difficulty medium'>{item.diff}</p>;
-                  } else {
-                    return <p className='act-difficulty hard'>{item.diff}</p>;
-                  }
-                }
+                    if (
+                      window.confirm(
+                        "Are you sure you wish to delete this workout?"
+                      ) === true
+                    ) {
+                      data.workouts = workouts.filter((i) => i.id !== z);
+                      updateWorkouts(workouts.filter((i) => i.id !== z));
+
+                      setTimeout("", 500);
+
+                      localStorage.setItem("flowga-app", JSON.stringify(data));
+                    } else {
+                      console.log("nothing");
+                    }
+                  };
                   return (
-                    <div key={index} className='act-card'>
+                    <div
+                      key={index}
+                      name={item.id}
+                      className='act-card'
+                      onClick={(e) => removeWorkout(e)}
+                    >
                       <h3>{item.title}</h3>
-                        {addClass(item.diff)}
+                      {addClass(item.diff)}
                       <p>{DateChange(item.t)}</p>
                     </div>
                   );
