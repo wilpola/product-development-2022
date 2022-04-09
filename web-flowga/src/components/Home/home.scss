@@ -105,12 +105,16 @@
       }
     }
   }
-  // #spacer {
-  //   height: 500px;
-  // }
+  #spacer {
+    height: 500px;
+  }
 }
 // Mobile landing
 @media screen and (max-width: 420px) {
+  * {
+    overflow-y: overlay;
+    overflow-x: hidden;
+  }
   .home-container {
     margin-top: 30px;
     #landing {
@@ -200,5 +204,8 @@
         border-radius: 8px;
       }
     }
+  }
+  #spacer {
+    height: 500px;
   }
 }
