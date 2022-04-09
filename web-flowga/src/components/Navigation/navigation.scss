@@ -8,7 +8,8 @@
   grid-template-areas: ". logo links .";
   height: 65px;
   line-height: 65px;
-  background-color: azure;
+  background-color: #ffffff;
+  box-shadow: 0 0 20px #70707060;
 
   .nav-logo {
     grid-area: logo;
@@ -41,7 +42,7 @@
     }
 
     .active {
-      color: red;
+      color: rgb(141, 24, 236);
       font-weight: 500;
     }
   }
