@@ -3,6 +3,7 @@
 
 # Import modules
 import json, sys, os, pygame, random
+from numpy import full
 
 from pygame import mixer
 
@@ -23,6 +24,7 @@ mixer.music.load('Python/assets/main_menu_v3.ogg')
 mixer.music.play(-1)
 
 activeCard = 0
+updateSettings = True
 
 # -- Settings Retrieval -- #
 # Make sure that settings have been compiled before
@@ -50,6 +52,8 @@ logoFont    = pygame.font.SysFont("Roboto", 120)
 # x = testScreen(caption="hello there", background="#ffffff")
 mainMenuScreen = Screen("Main Menu | Flowga", bg='#ffffff')
 
+updateId = True
+
 # Music for the menu sequence etc.
 menuMusic = mixer.music.load('Python/assets/main_menu_v3.ogg')
 mixer.music.play(-1)    # set music to loop [ -1  = LOOP ]
@@ -60,9 +64,9 @@ pygame.mixer.music.set_volume(data['volume'])
 mainMenuScreen.activateScreen() # Set MainMenu active when game is launched
 
 # Create start screen
-startScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
-lengthScreen = Screen("Start your workout | Flowga", bg="#4a4a4a")
-statsScreen = Screen('Stats | Flowga', bg="#4a4a4a")
+startScreen = Screen(bg="#4a4a4a")
+lengthScreen = Screen(bg="#4a4a4a")
+statsScreen = Screen(bg="#4a4a4a")
 
 # Create mainMenu screen
 settingsScreen = Screen("Settings | Flowga", bg='#ffffff')
@@ -161,10 +165,16 @@ longButton = Button(
     w=200,
     h=300
 )
+
+# settings screen
 screen_center = data['width'] / 2
 vol_down = Button(mainMenuScreen.screen, '<', screen_center + 10, 140, 40, 40, "#4a4a4a", "#ffffff", radius=8)
 vol_up = Button(mainMenuScreen.screen, '>', screen_center + 150, 140, 40, 40, "#4a4a4a", "#ffffff", radius=8)
-
+res_toggle_up = Button(mainMenuScreen.screen, '>', screen_center + 240, 190, 40, 40, '#4a4a4a', '#ffffff', radius=8)
+res_toggle_down = Button(mainMenuScreen.screen, '<', screen_center + 10, 190, 40, 40, '#4a4a4a', '#ffffff', radius=8)
+index = 0
+s_w = 0
+s_h = 0
 
 # cardScreen buttons
 prev_btn = Button(mainMenuScreen.screen, '<', x = 5, y = data['height'] / 2 - 25, w = 50, h = 50, radius = 0)
@@ -226,12 +236,11 @@ def updateScreen():
 game = True
 while game:
     # Set refresh rate
-    clock.tick(240)     # TODO: Make this dynamic
+    clock.tick(360)     # TODO: Make this dynamic
 
     # Call screen updater
     updateScreen()
     mouse = pygame.mouse.get_pos()
-    
 
     def bye():
         if e.type == pygame.QUIT:
@@ -239,11 +248,10 @@ while game:
             pygame.quit()
             sys.exit()
 
-
     # MainMenu Content
     if mainMenuScreen.isActive():
         logo = logoFont.render("Flowga", True, (0, 220, 140), mainMenuScreen.bg)
-        version = primaryFont.render("alpha-1.2", True, (100, 100, 120), mainMenuScreen.bg)
+        version = primaryFont.render("alpha-1.4", True, (100, 100, 120), mainMenuScreen.bg)
         lWidth = logo.get_width()
 
         mainMenuScreen.blit(logo, (data['width'] / 2 - lWidth / 2, 150))
@@ -289,7 +297,7 @@ while game:
         hwidth = header.get_width()
   
         startScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
-        pygame.display.update()
+        # pygame.display.update()
 
         easyButton.DrawButton()
         intermediateButton.DrawButton()
@@ -339,7 +347,7 @@ while game:
   
         lengthScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
         lengthScreen.blit(choise1,(data['width'] / 2 - (cwidth / 2), 100))
-        pygame.display.update()
+        # pygame.display.update()
 
         shortButton.DrawButton()
         mediumButton.DrawButton()
@@ -395,11 +403,28 @@ while game:
         # vol_value_bg = vol_value_text.get_rect()
         # vol_value_bg.center = (screen_center)
 
+        resolution_text = primaryFont.render("Resolution", True, ('#333333'), settingsScreen.bg)
+        resolution_txt_width = resolution_text.get_width()
+        resolution_value_text = primaryFont.render(str(data['resolutionList'][index][0]) + " x " + str(data['resolutionList'][index][1]), True, ("#333333"), settingsScreen.bg)
+
+
         vol_down.DrawButton()
         vol_up.DrawButton()
+        res_toggle_down.DrawButton()
+        res_toggle_up.DrawButton()
 
-        settingsScreen.blit(vol_text, (400, 150))
-        settingsScreen.blit(vol_value_text, (screen_center + 80, 150))
+        # This if acts as a statful function
+        if updateSettings:
+            # Blit volume
+            settingsScreen.blit(vol_text, (400, 150))
+            settingsScreen.blit(vol_value_text, (screen_center + 80, 150))
+
+            # Blit fullscreen
+            settingsScreen.blit(resolution_text, (400, 200))
+            settingsScreen.blit(resolution_value_text, (screen_center + 80, 200))
+
+            # Set update to false
+            updateSettings = False
 
         backButton.DrawButton()
 
@@ -417,6 +442,12 @@ while game:
 
 
             pygame.mixer.music.set_volume(data['volume'])
+        
+        def updateVideo():
+            with open("Python/settings.json", "w") as s_e:
+                json.dump(data, s_e, sort_keys=True)
+            s_e.close()
+            # settingsScreen.updateFullscreen()
 
         for e in pygame.event.get():
             bye()
@@ -424,6 +455,7 @@ while game:
                 if e.key == pygame.K_ESCAPE:
                     settingsScreen.deactivateScreen()
                     mainMenuScreen.activateScreen()
+                    updateSettings = True
 
             
             if (vol_up.isHovered() and e.type == pygame.MOUSEBUTTONUP):
@@ -433,15 +465,17 @@ while game:
                     print('Max_volume')
                     updateVolume()
                     settingsScreen.fill()
+                    updateSettings = True
                 else:
                     data['volume'] += 0.1
                     data['volume'] = round(data['volume'], 1)
                     print(data['volume'])
                     pygame.mixer.music.set_volume(data['volume'])
                     updateVolume()
-                    settingsScreen.fill()
+                    updateSettings = True
+                    # settingsScreen.fill()
 
-                updateScreen()
+                # updateScreen()
 
             if (vol_down.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                 # settingsScreen.fill()
@@ -451,29 +485,67 @@ while game:
                     print(data['volume'])
                     print('Deafened')
                     updateVolume()
-                    settingsScreen.fill()
+                    updateSettings = True
+                    # settingsScreen.fill()
                 else:
                     settingsScreen.fill()
                     data['volume'] -= 0.1
                     data['volume'] = round(data['volume'], 1)
                     pygame.mixer.music.set_volume(data['volume'])
+                    updateSettings = True
                     updateVolume()
 
             if (backButton.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                 settingsScreen.deactivateScreen()
                 mainMenuScreen.activateScreen()
+                updateSettings = True
 
-                updateScreen()
+            if res_toggle_down.isHovered() and e.type == pygame.MOUSEBUTTONUP:
+                # print(type(data['resolutionList'][0]))
+                w, h = pygame.display.get_surface().get_size()
+                if len(data['resolutionList']) == index:
+                    pass
+                elif len(data['resolutionList']) == 0:
+                    pass
+                else:
+                    resolution_value_text = (data['resolutionList'][index + 1])
+                    updateSettings = True
+                    settingsScreen.fill()
+                    updateVideo()
+                    index += 1
+                print(index -1)
+                print(index +1)
+                print(len(data['resolutionList']))
+
+            if res_toggle_up.isHovered() and e.type == pygame.MOUSEBUTTONUP:
+                # print(type(data['resolutionList'][0]))
+                w, h = pygame.display.get_surface().get_size()
+                if len(data['resolutionList']) == index:
+                    pass
+                if len(data['resolutionList']) == 0:
+                    pass
+                else:
+                    resolution_value_text = (data['resolutionList'][index - 1])
+                    updateSettings = True
+                    settingsScreen.fill()
+                    updateVideo()
+                    index -= 1
+                print(' ')
+                print(index -1)
+                print(data['resolutionList'][index])
+                data['width'] = data['resolutionList'][index][0]
+                data['height'] = data['resolutionList'][index][1]
+                print(len(data['resolutionList']))
+            
     # -- END OF Settings Screen -- #
     
     # CardScreen
     if cardScreen.isActive():
-        # cardScreen.fill()
+        # cardScreen.fill()resolution
         header = primaryFont.render("Cards", True, ("#333333"), cardScreen.bg)
         hwidth = header.get_width()
 
         cardScreen.blit(header,(data['width'] / 2 - (hwidth / 2), 50))
-
 
         try:
             with open("Python/asanas.json", "r") as a:
@@ -495,19 +567,26 @@ while game:
         card_id_width = card_id.get_width()
         card_rect = card_id.get_rect()
 
-        cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+        if updateId:
+            cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
+            updateId = False
+
+        pygame.display.update(card_rect)
         end_wo.DrawButton()
         prev_btn.DrawButton()
         next_btn.DrawButton()
         main_card.DrawButton()
 
         z = 0
+        c1 = 0
+        c2 = 1
+        c3 = 2
+
         for i in range(3):
             x = f"card_{i}"
-            x = Button(cardScreen.screen, f"{str(workoutList[i]['asana_id'])}", screen_center - 340 / 2 + z, data['height'] - 200, h = 100)
+            x = Button(cardScreen.screen, f"{str(workoutList[int(1 + i)]['asana_id'])}", screen_center - 340 / 2 + z, data['height'] - 200, h = 100)
             x.DrawButton()
             z += 120
-
         
         for e in pygame.event.get():
             bye()
@@ -517,65 +596,68 @@ while game:
                     cardScreen.deactivateScreen()
                     lengthScreen.activateScreen()
                     asanaPrint = True
+                    updateId = True
                     workoutList = []
+                    activeCard = 0
+
+                if e.key == pygame.K_RIGHT:
+                    updateId = True
+                    if activeCard == len(workoutList) - 1:
+                        activeCard = 0
+                        cardScreen.fill()
+                    else:
+                        activeCard += 1
+
+                if e.key == pygame.K_LEFT:
+                    updateId = True
+                    if activeCard == 0:
+                        activeCard = len(workoutList) - 1
+                    elif activeCard == 9:
+                        activeCard -= 1
+                        cardScreen.fill()
+                    else:
+                        activeCard -= 1
 
             if (end_wo.isHovered() and e.type == pygame.MOUSEBUTTONUP):
                 cardScreen.deactivateScreen()
                 mainMenuScreen.activateScreen()
                 asanaPrint = True
+                updateId = True
                 workoutList = []
+                activeCard = 0
 
             if end_wo.isHovered():
                 end_wo = Button(cardScreen.screen, '<-- End workout', 40, 40, 150, bg="#DD4D2E")
-                pygame.display.flip()
             else:
                 end_wo = Button(cardScreen.screen, 'End workout', 40, 40, 150, bg="#DD4D2E")
-                pygame.display.flip()
-
-            if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                cardScreen.fill()
-
-                if activeCard == len(workoutList) - 1:
-                    activeCard = 0
-                
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-
-
-
-                else:
-                    activeCard += 1
-                    
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-
-            if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
-                cardScreen.fill()
-
-
-                if activeCard == 0:
-                    activeCard = len(workoutList) - 1
-                    
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-                    cardScreen.fill()
-                    x.DrawButton()
-
-                else:
-                    activeCard -= 1
-                    
-                    card_id = primaryFont.render(f"{activeCard + 1} / {len(workoutList)}", True, "#333333", "#ffffff")
-                    cardScreen.blit(card_id, (data['width'] / 2 - card_id_width / 2, data['height'] - 250))
-                    x.DrawButton()
-
-            else:
-                pass
-
-        
             
-            # cardScreen.fill()
+            if len(workoutList) >= 10:
+                if (next_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                    # cardScreen.fill()
+                    if activeCard == len(workoutList) - 1:
+                        activeCard = 0
+                        cardScreen.fill()
+                        # pygame.display.update()
+                        updateId = True
 
+                    else:
+                        activeCard += 1
+                        updateId = True
 
+                if (prev_btn.isHovered() and e.type == pygame.MOUSEBUTTONUP):
+                    updateId = True
+                    if activeCard == 0:
+                        activeCard = len(workoutList) - 1
+
+                    elif activeCard == 9:
+                        activeCard -= 1
+                        cardScreen.fill()
+                        # pygame.display.update()
+
+                    else:
+                        activeCard -= 1
+                else:
+                    pass
             
     # -- END OF Settings Screen -- #
 
@@ -611,3 +693,5 @@ while game:
                 if e.key == pygame.K_ESCAPE:
                     mainMenuScreen.activateScreen()
                     statsScreen.deactivateScreen()
+
+    updateScreen()

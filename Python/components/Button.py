@@ -99,4 +99,4 @@ class Button():
         # TODO: This may get deleted, as it may not be necessary
         self.handleClick()
         # self.buttonHover()
-        pygame.display.update()
+        # pygame.display.update()

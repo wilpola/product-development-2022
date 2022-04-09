@@ -16,10 +16,7 @@ def setup():
     screenSurface = pygame.display.set_mode((c.screen["WIDTH"], c.screen["HEIGHT"])) #pygame.RESIZABLE)
     pygame.display.set_caption("Flowga app")
 
-    # t = RoundedButton("test")
     z = Typography(text="Welcome Dobby")
-    # t = RoundedButton("Testing", 100, 100, 150, 30, screenSurface)
-
 
     bg = pygame.Surface((
         c.screen["WIDTH"],              # Dynamically assign width

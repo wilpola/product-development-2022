@@ -4,7 +4,7 @@ import json, sys, pygame
 class Screen():
 
     # Initialize constructor
-    def __init__(self, caption="Screen", bg="#ffffff"):
+    def __init__(self, caption="Flowga", bg="#ffffff"):
 
         # Get display data from settings
         with open("Python/settings.json", "r") as j:
@@ -61,7 +61,6 @@ class Screen():
 
         # Actually update the screen
         pygame.display.update()
-
     
     # Blitting function, to place buttons and other items on to the screen
     def blit(self, surf, loc):
@@ -69,3 +68,4 @@ class Screen():
 
     def fill(self):
         self.screen.fill(self.bg)
+        pygame.display.flip()
