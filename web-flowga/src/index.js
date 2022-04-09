@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const container = document.getElementById('root');
 const root = createRoot(container);
-root.render(<App />);
+root.render(<App tab='hello'/>);
 
 
 // If you want to start measuring performance in your app, pass a function

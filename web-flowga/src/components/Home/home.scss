@@ -1,0 +1,204 @@
+@media screen and (min-width: 421px) {
+  .home-container {
+    width: 100vw;
+    position: relative;
+
+    #landing {
+      position: relative;
+      display: grid;
+      margin: 140px auto 140px;
+      justify-items: center;
+      justify-content: center;
+      max-width: 1440px;
+      grid-template-areas:
+        ".        img"
+        "header   img"
+        "info  img"
+        "call     img"
+        ".        img";
+      grid-template-columns: 70ch 600px;
+      overflow-x: hidden;
+
+      .landing-image {
+        contain: content;
+        grid-area: img;
+        img {
+          width: 100%;
+        }
+      }
+
+      h1.landing-header {
+        position: absolute;
+        left: 0;
+        font-size: 3rem;
+        grid-area: header;
+        text-align: left;
+        padding: 0;
+        margin: 0;
+      }
+      p.landing-body {
+        grid-area: info;
+        max-width: 65ch;
+        text-align: left;
+        font-size: 1.1rem;
+      }
+
+      .callToAction {
+        display: flex;
+        align-items: center;
+        grid-area: call;
+        margin-top: 30px;
+
+        a {
+          font-size: 1rem;
+          text-decoration: none;
+          color: #094ea8;
+          margin-right: 30px;
+
+          &::after {
+            width: 100%;
+            height: 0px;
+            background: red;
+          }
+          &:hover {
+            &::after {
+              height: 2px;
+            }
+          }
+        }
+        .btn {
+          padding: 10px 15px;
+          border-radius: 600px;
+          border: 1px transparent solid;
+          padding: 10px 30px;
+          background: #094ea8;
+          color: white;
+          font-size: 1rem;
+        }
+      }
+    }
+
+    // info section
+    #information {
+      margin: 140px auto 140px;
+      max-width: 1440px;
+      align-items: center;
+      p.info-content {
+        font-size: 1.05rem;
+        width: 65ch;
+        margin: 0 auto 50px;
+        line-height: 1.6rem;
+      }
+      .information-banner {
+        display: flex;
+        flex-direction: row;
+        width: 80%;
+        margin: 0 auto;
+        
+        div {
+          margin: 5px;
+          padding: 15px;
+          width: 33%;
+          background: #efefef;
+          border-radius: 8px;
+        }
+      }
+    }
+  }
+  // #spacer {
+  //   height: 500px;
+  // }
+}
+// Mobile landing
+@media screen and (max-width: 420px) {
+  .home-container {
+    margin-top: 30px;
+    #landing {
+      width: 80vw;
+      margin: 0 auto;
+      display: grid;
+      grid-template-areas:
+        "header"
+        "info"
+        "image"
+        "call";
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 2fr 1fr;
+      max-width: 100%;
+
+      overflow-x: hidden;
+
+      .landing-image {
+        width: 100%;
+        margin: 0 auto;
+        grid-area: image;
+        // visibility: hidden;
+        img {
+          width: 100%;
+        }
+      }
+
+      h1,
+      p.lading-body {
+        width: 80vw;
+        margin: 0 auto;
+        grid-area: content;
+      }
+      h1.landing-header {
+        grid-area: header;
+        font-size: 2.2rem;
+        margin-bottom: 1rem;
+      }
+
+      .callToAction {
+        margin-top: 30px;
+        grid-area: callToAction;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        width: 70vw;
+        grid-area: call !important;
+
+        a {
+          font-size: 0.8rem;
+          text-decoration: none;
+          color: #094ea8;
+        }
+        .btn {
+          padding: 10px 15px;
+          border-radius: 600px;
+          border: 1px transparent solid;
+          padding: 10px 25px;
+          background: #094ea8;
+          color: white;
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+  #information {
+    margin-top: 140px auto 140px;
+    max-width: 1440px;
+    align-items: center;
+    p.info-content {
+      font-size: 1.05rem;
+      width: 90%;
+      margin: 0 auto 30px;
+      line-height: 1.6rem;
+    }
+    .information-banner {
+      display: flex;
+      flex-direction: column;
+      width: 80%;
+      margin: 0 auto;
+
+      div {
+        margin: 5px;
+        padding: 15px;
+        width: 90%;
+        background: #efefef;
+        border-radius: 8px;
+      }
+    }
+  }
+}
