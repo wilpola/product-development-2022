@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import nextId from "react-id-generator";
+import { Bar } from 'react-chartjs-2';
 
 import Confirm from "../Confirm";
 
 // import styles
 import "./flowga-app.scss";
+import TodayView from "./todayView";
 
 const FlowgaApp = () => {
   const [username, setUsername] = useState("");
@@ -21,15 +23,15 @@ const FlowgaApp = () => {
     lastLogin: time.toLocaleDateString("default", { dateStyle: "short" }),
     workouts: [],
   };
-
+  
   const cap = (t) => {
     return t.charAt(0).toUpperCase() + t.substr(1).toLowerCase();
   };
-
+  
   let data = JSON.parse(localStorage.getItem("flowga-app"));
   let state = false;
   data === null ? (state = false) : (state = true);
-
+  
   useEffect(() => {
     if (data === null) {
       state = false;
@@ -39,6 +41,14 @@ const FlowgaApp = () => {
       state = true;
     }
   }, [state]);
+  
+  // const [zdata, setData] = useState({
+  //   labels: [],
+  //   datasets: [{
+  //     label: "Lil Something something",
+  //     data: JSON.parse(localStorage.getItem("flowga-app")).workouts.map((workout) => workout.title)
+  //   }]
+  // })
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -98,12 +108,10 @@ const FlowgaApp = () => {
     let greeting = "";
     // console.log(time.toLocaleString("default", { dayPeriod: "narrow" }));
 
-    if (
-      time.toLocaleString("default", { dayPeriod: "narrow" }) === "at night"
-    ) {
+    if (time.toLocaleString("en-us", { dayPeriod: "narrow" }) === "at night") {
       greeting = "Hello, ";
     } else if (
-      time.toLocaleString("default", { dayPeriod: "narrow" }) ===
+      time.toLocaleString("en-us", { dayPeriod: "narrow" }) ===
       "in the afternoon"
     ) {
       greeting = "Good afternoon, ";
@@ -141,7 +149,7 @@ const FlowgaApp = () => {
       d.workouts.unshift(w);
 
       updateWorkouts((prevState) => [w, ...prevState]);
-      let newEntry = data.workouts.unshift(w);
+      // let newEntry = data.workouts.unshift(w);
 
       localStorage.setItem("flowga-app", JSON.stringify(data));
     };
@@ -152,22 +160,29 @@ const FlowgaApp = () => {
       console.log(t.toLocaleDateString("default", { dateStyle: "short" }));
       return t.toLocaleDateString("default", { dateStyle: "short" });
     };
+
+
+    // const myChart = new Chart(ctx, {
+    //   type: "bar",
+    //   data: {
+    //     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+    //     datasets: [
+    //       {
+    //         label: "# of Votes",
+    //         data: [12, 19, 3, 5, 2, 3],
+    //       },
+    //     ],
+    //   },
+    // });
+
+
     return (
       <div className='flowga-app-container'>
-        {/* <button
-          onClick={() =>
-            {
-              let x = document.getElementsByClassName('confirm-outer').item(0).classList;
-              x.add("vis");
-              console.log(x)
-            }
-          }
-        >
-          SURPRISE
-        </button> */}
 
         <div id='app-content'>
           <h2 className='greeting'> {greeting + cap(username)} </h2>
+          <TodayView />
+          {/* <Bar id="myChart"  data={[12, 19, 3, 5, 2, 3]}/> */}
           <div className='activity-container'>
             <h3 className='recent-activity'> Recent activity</h3>
             <button onClick={() => addworkout()}> click me</button> <br />
@@ -186,8 +201,8 @@ const FlowgaApp = () => {
                   };
                   const confirmation = () => {
                     let x = document
-                    .getElementsByClassName("confirm-outer")
-                    .item(0).classList;
+                      .getElementsByClassName("confirm-outer")
+                      .item(0).classList;
                     x.add("vis");
 
                     if (confirm === true) {
@@ -202,14 +217,14 @@ const FlowgaApp = () => {
                     if (confirmation === true) {
                       const z = e.target.parentNode.getAttribute("name");
                       console.log(z);
-                      
+
                       // console.log(x);
-                      
+
                       data.workouts = workouts.filter((i) => i.id !== z);
                       updateWorkouts(workouts.filter((i) => i.id !== z));
-                      
+
                       setTimeout("", 500);
-                      
+
                       localStorage.setItem("flowga-app", JSON.stringify(data));
                     }
                   };

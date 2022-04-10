@@ -70,6 +70,7 @@
       width: calc(100% - 80px);
       display: grid;
       grid-template-columns: 1fr 1fr minmax(150px, 400px);
+      grid-template-rows: 40px 180px 1fr 1fr;
       grid-template-areas:
         "greeting greeting activity"
         "today today activity"
@@ -79,6 +80,14 @@
         margin: 0;
         padding: 0;
       }
+      .activity-container::-webkit-scrollbar {
+          width: 10px;
+        }
+        .activity-container::-webkit-scrollbar-thumb {
+            margin: 10px 0;
+            background-color: #333;
+            border-radius: 100px;;
+        }
       .activity-container {
         position: relative;
         width: calc(100% - 40px);
@@ -88,6 +97,8 @@
         border-radius: 12px;
         padding: 20px;
         color: white;
+        overflow-y: scroll;
+        scroll-behavior: smooth;
 
         .act-card {
           // height: 70px;
@@ -125,5 +136,21 @@
         }
       }
     }
+  }
+  .today-container {
+      grid-area: today;
+      max-height: 150px;
+      background:rgb(184, 223, 184);
+      margin-right: 40px;
+      padding: 20px;
+      border-radius: 12px;
+
+      h2 {
+          margin: 10px;
+          padding: 0;
+      }
+  }
+  #myChart {
+    //   grid-area: stats;
   }
 }
