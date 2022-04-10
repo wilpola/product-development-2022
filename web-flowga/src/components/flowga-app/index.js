@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import nextId from "react-id-generator";
 
+import Confirm from "../Confirm";
+
 // import styles
 import "./flowga-app.scss";
 
@@ -8,6 +10,7 @@ const FlowgaApp = () => {
   const [username, setUsername] = useState("");
   const [formError, setFormError] = useState(false);
   const [workouts, updateWorkouts] = useState([]);
+  const [confirm, setConfirm] = useState(false);
 
   let ids = nextId();
 
@@ -151,6 +154,18 @@ const FlowgaApp = () => {
     };
     return (
       <div className='flowga-app-container'>
+        {/* <button
+          onClick={() =>
+            {
+              let x = document.getElementsByClassName('confirm-outer').item(0).classList;
+              x.add("vis");
+              console.log(x)
+            }
+          }
+        >
+          SURPRISE
+        </button> */}
+
         <div id='app-content'>
           <h2 className='greeting'> {greeting + cap(username)} </h2>
           <div className='activity-container'>
@@ -169,25 +184,36 @@ const FlowgaApp = () => {
                       return <p className='act-difficulty hard'>{item.diff}</p>;
                     }
                   };
-                  const removeWorkout = (e) => {
-                    const z = e.target.parentNode.getAttribute("name");
-                    console.log(z);
+                  const confirmation = () => {
+                    let x = document
+                    .getElementsByClassName("confirm-outer")
+                    .item(0).classList;
+                    x.add("vis");
 
-                    if (
-                      window.confirm(
-                        "Are you sure you wish to delete this workout?"
-                      ) === true
-                    ) {
-                      data.workouts = workouts.filter((i) => i.id !== z);
-                      updateWorkouts(workouts.filter((i) => i.id !== z));
-
-                      setTimeout("", 500);
-
-                      localStorage.setItem("flowga-app", JSON.stringify(data));
+                    if (confirm === true) {
+                      return true;
                     } else {
-                      console.log("nothing");
+                      return false;
                     }
                   };
+
+                  const removeWorkout = (e) => {
+                    confirmation();
+                    if (confirmation === true) {
+                      const z = e.target.parentNode.getAttribute("name");
+                      console.log(z);
+                      
+                      // console.log(x);
+                      
+                      data.workouts = workouts.filter((i) => i.id !== z);
+                      updateWorkouts(workouts.filter((i) => i.id !== z));
+                      
+                      setTimeout("", 500);
+                      
+                      localStorage.setItem("flowga-app", JSON.stringify(data));
+                    }
+                  };
+
                   return (
                     <div
                       key={index}
@@ -204,6 +230,7 @@ const FlowgaApp = () => {
               : ""}
           </div>
         </div>
+        <Confirm />
       </div>
     );
   }
