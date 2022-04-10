@@ -1,4 +1,4 @@
-@media screen and (min-width: 421px) {
+@media screen and (min-width: 601px) {
   .home-container {
     width: 100vw;
     position: relative;
@@ -112,7 +112,7 @@
   }
 }
 // Mobile landing
-@media screen and (max-width: 420px) {
+@media screen and (max-width: 600px) {
   * {
     overflow-y: overlay;
     overflow-x: hidden;
