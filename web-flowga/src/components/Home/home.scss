@@ -4,6 +4,7 @@
   .home-container {
     width: 100vw;
     position: relative;
+    overflow-x: hidden;
 
     #landing {
       position: relative;
@@ -130,16 +131,152 @@
   #spacer {
     height: 500px;
   }
-  #about-meddler {
+  
+  #about {
+    margin: 40px auto;
+
+    position:relative;
+    height: 400px;
     width: 100%;
     max-width: 1440px;
-    margin: auto;
+
+    border-radius: 12px;
+    box-shadow: 0 10px 20px #83838385;
+    background:#27222e;
+
+    .cta-container {
+      transform: translate(-50%, -50%);
+      z-index: 10;
+      position:absolute;
+      width: 100%;
+      // height: 100%;
+      top: 50%;
+      left: 50%;
+      border-radius: inherit;
+      color: white;
+
+      p{
+        max-width: 65ch;
+        margin: 20px auto;
+        line-height: 1.5rem;
+      }
+
+      .download__learn-more-container{
+
+        a {
+          width: 100px;
+          overflow: hidden;
+          margin-left: 20px;
+          text-decoration: none;
+          color:#cbaff1;
+          border-bottom: 1px solid #cbaff1;
+          font-weight: 500;
+          &:hover {
+            color:#fff;
+            border-bottom: 1px solid #fff;
+            font-weight: 500;
+          }
+        }
+        
+        button {
+          background-color: #38a338;
+          padding: 12px 25px;
+          color: white;
+          border-radius: 8px;
+          border: 1px solid transparent;
+          
+          &:hover {
+            cursor: pointer;
+            background-color: #348034;
+          }
+        }
+      }
+    }
+  }
+
+  #download-meddler {
+    width: 100%;
+    max-width: 1440px;
+    margin: 0 auto 40px;
     overflow: hidden;
     border-radius: 12px;
+
+    margin: 40px auto;
+
+    background-image: url('../../assets/img/download-background.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    position:relative;
+    width: 100%;
+    max-width: 1440px;
+
+    border-radius: 12px;
+    box-shadow: 0 10px 20px #9ccde485;
+
+    .blur-container {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left:0;
+      backdrop-filter: blur(45px);
+      border-radius: inherit;
+      background:#27222e5d;
+    }
+
+    .cta-container {
+      transform: translate(-25%, -50%);
+      z-index: 10;
+      position:absolute;
+      width: 100%;
+      // height: 100%;
+      top: 50%;
+      left: 50%;
+      border-radius: inherit;
+      color: white;
+
+      p{
+        max-width: 55ch;
+        margin: 20px auto;
+      }
+    }
+
+    .download__learn-more-container{
+
+      a {
+        width: 100px;
+        overflow: hidden;
+        margin-left: 20px;
+        text-decoration: none;
+        color:#cbaff1;
+        border-bottom: 1px solid #cbaff1;
+        font-weight: 500;
+        &:hover {
+          color:#fff;
+          border-bottom: 1px solid #fff;
+          font-weight: 500;
+        }
+      }
+      
+      button {
+        background-color: #38a338;
+        padding: 12px 25px;
+        color: white;
+        border-radius: 8px;
+        border: 1px solid transparent;
+        
+        &:hover {
+          cursor: pointer;
+          background-color: #348034;
+        }
+      }
+    }
+
     .meddler-inner-container {
       width: inherit;
       height: 500px;
-      background: #27222e;
+      // background: #27222e;
       color: #fff;
 
       display: grid;
@@ -175,7 +312,7 @@
       .meddler-content {
         position: relative;
         grid-area: aboutContent;
-        background-color: #27222e;
+        // background-color: #27222e;
         width: calc(100% - 100px);
         padding: 50px;
         height: auto;
@@ -185,12 +322,11 @@
         margin-top: -50px;
 
         .meddler-text {
-          width: 100%;
+          max-width: 55ch;
           height: inherit;
           align-items: left;
           margin: 0 auto;
           text-align: left;
-          max-width: 75ch;
           line-height: 1.5rem;
         }
 
@@ -229,78 +365,6 @@
               opacity: 1;
               right: 12px;
             }
-          }
-        }
-      }
-    }
-  }
-  #download {
-    margin: 40px auto;
-
-    background-image: url('../../assets/img/download-background.webp');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: 50% 50%;
-    position:relative;
-    height: 400px;
-    width: 100%;
-    max-width: 1440px;
-
-    border-radius: 12px;
-    box-shadow: 0 10px 20px #9ccde485;
-    .blur-container {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left:0;
-      backdrop-filter: blur(45px);
-      border-radius: inherit;
-      background:#27222e5d;
-    }
-    .cta-container {
-      transform: translate(-50%, -50%);
-      z-index: 10;
-      position:absolute;
-      width: 100%;
-      // height: 100%;
-      top: 50%;
-      left: 50%;
-      border-radius: inherit;
-      color: white;
-
-      p{
-        max-width: 55ch;
-        margin: 20px auto;
-      }
-
-      .download__learn-more-container{
-
-        a {
-          width: 100px;
-          overflow: hidden;
-          margin-left: 20px;
-          text-decoration: none;
-          color:#cbaff1;
-          border-bottom: 1px solid #cbaff1;
-          font-weight: 500;
-          &:hover {
-            color:#fff;
-            border-bottom: 1px solid #fff;
-            font-weight: 500;
-          }
-        }
-        
-        button {
-          background-color: #38a338;
-          padding: 12px 25px;
-          color: white;
-          border-radius: 8px;
-          border: 1px solid transparent;
-          
-          &:hover {
-            cursor: pointer;
-            background-color: #348034;
           }
         }
       }

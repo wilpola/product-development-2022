@@ -5,7 +5,7 @@ import FamilyIcon from "../../assets/img/family.png";
 import GlobeIcon from "../../assets/img/globe.png";
 import ProgressIcon from "../../assets/img/progress.png";
 // import Amk from "../../assets/img/amk.jpg";
-import { Footer } from '../index';
+import { Footer } from "../index";
 import "./home.scss";
 import { DifficultyCard } from "../flowga-app/card";
 
@@ -76,41 +76,33 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section id='about-meddler'>
-        <div className='meddler-inner-container'>
-          <div className='meddler-img'>
-            {/* <img src={Amk} alt='Turun Ammattikorkeakoulu' /> */}
-          </div>
-          <div className='meddler-content'>
-            <h2 className='meddler-header'> About Meddler Labs</h2>
-            <div className='meddler-text'>
-              <p>
-                Meddler Labs is a a group of students from Product development
-                course in Turku University of Applied Sciences. As a part of a
-                semestor long assignment to build an applicaiton of our choise,
-                we decided that building a Yoga application would not only be
-                exciting, but also fill a need in the world...
-              </p>
-              <div className='meddler-button'>
-                <Link to='/about' className='direct-to-about'>
-                  Read more
-                </Link>
-                <span className='space' />
-              </div>
-            </div>
+      <section id='about'>
+        <div className='blur-container' />
+        <div className='cta-container'>
+        <h3> About Meddler Labs</h3>
+            <p>
+             Meddler Labs is a group of students from Product Development course in Turku University of Applied Sciences. As a part of a semester long assingment to build an application of our choise, we decided to that building a Yoga application would nott only be exciting, but also fill a need in the world...
+            </p>
+          <div className='download__learn-more-container'>
+            <Link to='/about'>Learn more</Link>
           </div>
         </div>
       </section>
-      <section id='download'>
-        <div className='blur-container' />
-        <div className='cta-container'>
-          <h3> Download our Desktop version</h3>
-          <p>Our desktop version is written in Python, and can be downloaded for windows, macOS, or Linux.</p>
-          <div className="download__learn-more-container">
-          <button> Download </button>
-            <Link to='/download'>Learn more</Link>
+      <section id='download-meddler'>
+        <div className='meddler-inner-container'>
+          <div className='blur-container' />
+          <div className='meddler-img' />
+          <div className='cta-container'>
+            <h3> Download our Desktop version</h3>
+            <p>
+              Our desktop version is written in Python, and can be downloaded
+              for windows, macOS, or Linux.
+            </p>
+            <div className='download__learn-more-container'>
+              <button> Download </button>
+              <Link to='/download'>Learn more</Link>
+            </div>
           </div>
-
         </div>
       </section>
       <Footer />
