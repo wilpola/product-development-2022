@@ -84,7 +84,7 @@ const Home = () => {
              Meddler Labs is a group of students from Product Development course in Turku University of Applied Sciences. As a part of a semester long assingment to build an application of our choise, we decided to that building a Yoga application would nott only be exciting, but also fill a need in the world...
             </p>
           <div className='download__learn-more-container'>
-            <Link to='/about'>Learn more</Link>
+            <Link to='/about'>Read more</Link>
           </div>
         </div>
       </section>
