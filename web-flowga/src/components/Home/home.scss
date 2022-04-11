@@ -87,24 +87,42 @@
       margin: 140px auto 140px;
       max-width: 1440px;
       align-items: center;
+      position: relative;
+      color: #333;
+      
+      .modern-back {
+        position: absolute;
+        top: 0%;
+        left: 50%;
+        width: 150vw;
+        height: 700px;;
+        background-color: #E2E0FF;
+        z-index: -10;
+        transform: skew(5deg, 8deg) translate(-50%, 10%);
+      }
+      
       p.info-content {
         font-size: 1.05rem;
         width: 65ch;
         margin: 0 auto 50px;
         line-height: 1.6rem;
+        z-index: 1;
       }
+      
       .information-banner {
         display: flex;
         flex-direction: row;
         width: 80%;
         margin: 0 auto;
-
+        z-index: 1;
+        
         div {
           margin: 12px;
-          padding: 15px;
+          padding: 25px;
           width: 33%;
-          background: #efefef;
+          background: #ffffff;
           border-radius: 8px;
+          box-shadow: 3px 10px 20px #8f8f8f85;
         }
       }
     }
@@ -256,16 +274,34 @@
         margin: 20px auto;
       }
 
-      button {
-        background-color: #38a338;
-        padding: 12px 25px;
-        color: white;
-        border-radius: 8px;
-        border: 1px solid transparent;
+      .download__learn-more-container{
+
+        a {
+          width: 100px;
+          overflow: hidden;
+          margin-left: 20px;
+          text-decoration: none;
+          color:#cbaff1;
+          border-bottom: 1px solid #cbaff1;
+          font-weight: 500;
+          &:hover {
+            color:#fff;
+            border-bottom: 1px solid #fff;
+            font-weight: 500;
+          }
+        }
         
-        &:hover {
-          cursor: pointer;
-          background-color: #348034;
+        button {
+          background-color: #38a338;
+          padding: 12px 25px;
+          color: white;
+          border-radius: 8px;
+          border: 1px solid transparent;
+          
+          &:hover {
+            cursor: pointer;
+            background-color: #348034;
+          }
         }
       }
     }

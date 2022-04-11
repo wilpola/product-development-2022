@@ -35,6 +35,7 @@ const Home = () => {
         </div>
       </section>
       <section id='information'>
+        <div className='modern-back' />
         <h2> What makes Flowga so great</h2>
         <p className='info-content'>
           At Meddler Labs, we believe that sound mind and body helps us work
@@ -105,7 +106,11 @@ const Home = () => {
         <div className='cta-container'>
           <h3> Download our Desktop version</h3>
           <p>Our desktop version is written in Python, and can be downloaded for windows, macOS, or Linux.</p>
+          <div className="download__learn-more-container">
           <button> Download </button>
+            <Link to='/download'>Learn more</Link>
+          </div>
+
         </div>
       </section>
       <Footer />
