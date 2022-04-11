@@ -1,0 +1,38 @@
+.difficulty__card-container {
+    margin: 20px auto;
+    width:280px;
+    height: 360px;
+    position: relative;
+    background: #fcfcfc;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px #4a4a4a85;
+    transition: 0.3s ease-in-out;
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+    
+    img {
+        max-width: 150%;
+
+        position: absolute;
+        top: 0;
+        // left: -30px;
+    }
+    h3 {
+        position: absolute;
+        bottom: 0px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}
+.hard img {
+    left: -30px;
+}
+.medium img {
+    left: -50px;
+}
+.easy img {
+    left: -80px;
+}

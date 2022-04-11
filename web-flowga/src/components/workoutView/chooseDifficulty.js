@@ -1,21 +1,22 @@
-import React from 'react';
-
+import React from "react";
+import { DifficultyCard } from "../flowga-app/card";
 
 const ChooseDifficulty = (difficulty) => {
+  const handleClick = (e) => {
+    e.preventDefault();
+    difficulty = e.target.innerHTML;
+    console.log(e.target.innerHTML);
+  };
 
-    const handleClick =(e) =>{
-        e.preventDefault();
-        difficulty = e.target.innerHTML;
-        console.log(e.target.innerHTML) 
-    }
-
-    return (
-        <div className="difficultySeelctor-container">
-            <h1> Choose workout difficulty</h1>
-            <button onClick={(e) => handleClick(e)}>Easy</button>
-            <button onClick={(e) => handleClick(e)}>Medium</button>
-            <button onClick={(e) => handleClick(e)}>Hard</button>
-        </div>
-    )
-}
+  return (
+    <div className='difficultySelector-container'>
+      <h1> Choose workout difficulty</h1>
+      <div className='diff-cards'>
+        <DifficultyCard img='easy.png' title='Easy' className='easy' />
+        <DifficultyCard img='medium.png' title='Medium' className='medium' />
+        <DifficultyCard img='hard.png' title='Hard' className='hard' />
+      </div>
+    </div>
+  );
+};
 export default ChooseDifficulty;

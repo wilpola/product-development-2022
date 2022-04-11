@@ -79,6 +79,7 @@
       h2.greeting {
         margin: 0;
         padding: 0;
+        grid-area: greeting;
       }
       .activity-container::-webkit-scrollbar {
           width: 10px;

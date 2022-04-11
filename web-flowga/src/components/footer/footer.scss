@@ -1,0 +1,44 @@
+.footer-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .footer-upper {
+    height: 350px;
+    background: #322c3a;
+    display: grid;
+    grid-template-areas:
+      ". logo links terms socials ."
+      ". logo links terms socials ."
+      ". logo links terms socials .";
+    grid-template-columns: 1fr repeat(minmax(2fr, 300px), 3) 1fr;
+    
+    .footer-logo {
+      max-width: 280px;
+      grid-area: logo;
+      align-self: center;
+      h2 {
+        //   font-size: calc(3.2rem * 4.2vw );
+          font-size: calc(2rem );
+          color: rgb(231, 231, 231);
+          font-weight: 400;
+      }
+      img {
+        width: 100%;
+        max-width: 180px;;
+      }
+    }
+  }
+  .footer-lower {
+    height: 40px;
+    line-height: 40px;
+    background: #27222e;
+    color: white;
+    h5 {
+      margin: 0;
+      padding: 0;
+      margin-left: -17px;
+      font-weight: 400;
+    }
+  }
+}

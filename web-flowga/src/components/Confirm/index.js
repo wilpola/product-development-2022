@@ -1,14 +1,23 @@
+import React, { useState } from 'react';
 import "./confirm.scss";
 
 function Confirm(props) {
 
+    const [workouts, setWorkouts] = useState(props.data.workouts);
+
   const onConfirm = () => {
     console.log("Confirm");
-    document
-      .getElementsByClassName("confirm-outer")
-      .item(0)
-      .classList.remove("vis");
     
+
+        setWorkouts(workouts.filter((i) => i.id !== props.z));
+        props.data.workouts = workouts;
+        localStorage.setItem('flowga-app', JSON.stringify(props.data));
+
+        document
+        .getElementsByClassName("confirm-outer")
+        .item(0)
+        .classList.remove("vis");
+        
   };
   const onCancel = () => {
     console.log("Cancel");

@@ -1,6 +1,7 @@
 import React, {useState, useEffect } from 'react';
 import ChooseDifficulty from './chooseDifficulty';
 import MainCard from './mainCard';
+import './workout.scss';
 
 const Workout = () => {
     const [difficulty, setDifficulty ] = useState();
